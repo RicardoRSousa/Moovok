@@ -9,9 +9,10 @@ import com.squareup.picasso.Picasso
  */
 object PicassoWrapper {
 
+    private val posterPathPrefix = "https://image.tmdb.org/t/p/w500"
     fun loadMoviePoster(url: String, view: ImageView) {
         Picasso.get()
-            .load(url)
+            .load(posterPathPrefix + url)
             .placeholder(R.drawable.poster_placeholder)
             .into(view);
     }
