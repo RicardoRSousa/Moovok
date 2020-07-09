@@ -1,6 +1,5 @@
 package com.ricardojrsousa.movook.framework.di
 
-import com.ricardojrsousa.movook.framework.MainViewModel
 import com.ricardojrsousa.movook.viewmodel.MainViewModelFactory
 import dagger.Component
 

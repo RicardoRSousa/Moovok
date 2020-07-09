@@ -1,10 +1,11 @@
-package com.ricardojrsousa.movook.framework
+package com.ricardojrsousa.movook.presentation
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ricardojrsousa.movook.core.data.Movie
+import com.ricardojrsousa.movook.framework.UseCases
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

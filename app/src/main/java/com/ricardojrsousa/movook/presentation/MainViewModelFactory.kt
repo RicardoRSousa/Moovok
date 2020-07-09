@@ -3,7 +3,7 @@ package com.ricardojrsousa.movook.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ricardojrsousa.movook.framework.MainViewModel
+import com.ricardojrsousa.movook.presentation.MainViewModel
 import com.ricardojrsousa.movook.framework.UseCases
 import com.ricardojrsousa.movook.framework.di.DaggerMainViewModelComponent
 import com.ricardojrsousa.movook.framework.di.RepositoryModule
@@ -26,7 +26,9 @@ class MainViewModelFactory(private val applicationContext: Context) : ViewModelP
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
             modelClass.isAssignableFrom(MainViewModel::class.java) ->
-                return MainViewModel(useCases) as T
+                return MainViewModel(
+                    useCases
+                ) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }

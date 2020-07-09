@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.framework.MainViewModel
 import com.ricardojrsousa.movook.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.main_fragment.*
 
