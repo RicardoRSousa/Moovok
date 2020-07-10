@@ -10,7 +10,7 @@ import dagger.Provides
  * Created by ricardosousa on 27/05/2020
  */
 @Module
-class RepositoryModule(val context: Context) {
+class RepositoryModule(private val context: Context) {
 
     @Provides
     fun provideMovieRepository() = MoviesRepository(DataSource(context))

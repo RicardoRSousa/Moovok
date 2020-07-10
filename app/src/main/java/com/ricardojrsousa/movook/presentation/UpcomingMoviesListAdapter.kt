@@ -3,6 +3,9 @@ package com.ricardojrsousa.movook.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
@@ -12,7 +15,9 @@ import kotlinx.android.synthetic.main.upcoming_movie_list_item.view.*
 /**
  * Created by ricardosousa on 23/03/2020
  */
-class UpcomingMoviesListAdapter() : RecyclerView.Adapter<UpcomingMoviesListAdapter.ViewHolder>() {
+class UpcomingMoviesListAdapter(
+    private val onMovieClickListener: ((view: ImageView, movie: Movie) -> Unit)? = null
+) : RecyclerView.Adapter<UpcomingMoviesListAdapter.ViewHolder>() {
 
     private var items: ArrayList<Movie> = arrayListOf()
 
@@ -36,7 +41,7 @@ class UpcomingMoviesListAdapter() : RecyclerView.Adapter<UpcomingMoviesListAdapt
     }
 
     override fun getItemId(position: Int): Long {
-        return items[position].id.toLong() ?: 0
+        return items[position].id.toLong()
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -51,7 +56,11 @@ class UpcomingMoviesListAdapter() : RecyclerView.Adapter<UpcomingMoviesListAdapt
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun setupView(movie: Movie) {
-            view.upcoming_movie_poster.loadMoviePoster(movie.posterPath)
+            with(view.upcoming_movie_poster){
+                loadMoviePoster(movie.posterPath)
+                transitionName = movie.posterPath
+            }
+            view.setOnClickListener { onMovieClickListener?.let { it(view.upcoming_movie_poster, movie) }}
         }
     }
 }

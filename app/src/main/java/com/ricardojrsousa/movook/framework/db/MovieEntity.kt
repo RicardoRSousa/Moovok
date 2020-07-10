@@ -19,7 +19,7 @@ data class MovieEntity(
     @ColumnInfo(name = "release_date")
     val releaseDate: String,
     @ColumnInfo(name = "genre_ids")
-    val genreIds: List<Int>,
+    val genreIds: List<Int>?,
     @PrimaryKey
     val id: Int,
     @ColumnInfo(name = "original_title")

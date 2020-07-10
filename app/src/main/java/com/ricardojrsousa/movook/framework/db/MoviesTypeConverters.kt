@@ -16,6 +16,6 @@ class MoviesTypeConverters {
 
     @TypeConverter
     fun fromGenreList(genres: List<Int?>?): String {
-        return genres?.joinToString(delimiter)!!
+        return genres?.joinToString(delimiter) ?: ""
     }
 }

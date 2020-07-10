@@ -1,6 +1,7 @@
 package com.ricardojrsousa.movook.framework.di
 
 import com.ricardojrsousa.movook.core.repository.MoviesRepository
+import com.ricardojrsousa.movook.core.usecase.GetMovieDetails
 import com.ricardojrsousa.movook.core.usecase.GetUpcomingMovies
 import com.ricardojrsousa.movook.framework.UseCases
 import dagger.Module
@@ -13,5 +14,5 @@ import dagger.Provides
 class UseCaseModule {
 
     @Provides
-    fun getUseCases(repository: MoviesRepository) = UseCases(GetUpcomingMovies(repository))
+    fun getUseCases(repository: MoviesRepository) = UseCases(GetUpcomingMovies(repository), GetMovieDetails(repository))
 }
