@@ -4,20 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.wrappers.loadMoviePoster
-import kotlinx.android.synthetic.main.upcoming_movie_list_item.view.*
+import kotlinx.android.synthetic.main.movie_list_item.view.*
 
 /**
  * Created by ricardosousa on 23/03/2020
  */
-class UpcomingMoviesListAdapter(
+class MovieListAdapter(
     private val onMovieClickListener: ((view: ImageView, movie: Movie) -> Unit)? = null
-) : RecyclerView.Adapter<UpcomingMoviesListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
 
     private var items: ArrayList<Movie> = arrayListOf()
 
@@ -26,8 +24,7 @@ class UpcomingMoviesListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.upcoming_movie_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -48,19 +45,19 @@ class UpcomingMoviesListAdapter(
         return position
     }
 
-    fun addItems(upcomingMovies: List<Movie>) {
-        items.addAll(upcomingMovies)
+    fun addItems(movies: List<Movie>) {
+        items.addAll(movies)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun setupView(movie: Movie) {
-            with(view.upcoming_movie_poster){
+            with(view.movie_poster) {
                 loadMoviePoster(movie.posterPath)
                 transitionName = movie.posterPath
             }
-            view.setOnClickListener { onMovieClickListener?.let { it(view.upcoming_movie_poster, movie) }}
+            view.setOnClickListener { onMovieClickListener?.let { it(view.movie_poster, movie) } }
         }
     }
 }

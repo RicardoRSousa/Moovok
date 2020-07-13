@@ -1,4 +1,4 @@
-package com.ricardojrsousa.movook.presentation
+package com.ricardojrsousa.movook.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

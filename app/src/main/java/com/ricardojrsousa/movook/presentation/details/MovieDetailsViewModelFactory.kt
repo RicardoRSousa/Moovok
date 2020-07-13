@@ -3,9 +3,8 @@ package com.ricardojrsousa.movook.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ricardojrsousa.movook.presentation.MainViewModel
-import com.ricardojrsousa.movook.framework.UseCases
-import com.ricardojrsousa.movook.framework.di.DaggerMainViewModelComponent
+import com.ricardojrsousa.movook.framework.BookUseCases
+import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.framework.di.DaggerMovieDetailsViewModelComponent
 import com.ricardojrsousa.movook.framework.di.RepositoryModule
 import com.ricardojrsousa.movook.presentation.details.MovieDetailsViewModel
@@ -20,7 +19,10 @@ class MovieDetailsViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     @Inject
-    lateinit var useCases: UseCases
+    lateinit var movieUseCases: MovieUseCases
+
+    @Inject
+    lateinit var bookUseCases: BookUseCases
 
     init {
         DaggerMovieDetailsViewModelComponent.builder()
@@ -31,7 +33,7 @@ class MovieDetailsViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
             modelClass.isAssignableFrom(MovieDetailsViewModel::class.java) ->
-                return MovieDetailsViewModel(useCases, movieId) as T
+                return MovieDetailsViewModel(movieUseCases, bookUseCases, movieId) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }

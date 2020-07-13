@@ -1,10 +1,9 @@
-package com.ricardojrsousa.movook.presentation
+package com.ricardojrsousa.movook.presentation.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,12 +13,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.presentation.details.MovieDetailsFragment
-import com.ricardojrsousa.movook.presentation.details.MovieDetailsFragmentArgs
+import com.ricardojrsousa.movook.presentation.BookListAdapter
+import com.ricardojrsousa.movook.presentation.MovieListAdapter
 import com.ricardojrsousa.movook.viewmodel.MainViewModelFactory
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
-import kotlinx.android.synthetic.main.upcoming_movie_list_item.*
 
 class MainFragment : Fragment() {
 
@@ -48,10 +45,10 @@ class MainFragment : Fragment() {
     }
 
 
-    private fun setupRecyclerView(view: View, upcomingMoviesListAdapter: UpcomingMoviesListAdapter) {
+    private fun setupRecyclerView(view: View, movieListAdapter: MovieListAdapter) {
 
         view.upcoming_movies_list.run {
-            adapter = upcomingMoviesListAdapter
+            adapter = movieListAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
             postponeEnterTransition()
@@ -61,16 +58,17 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun createUpcomingMoviesAdapter(): UpcomingMoviesListAdapter {
-        return UpcomingMoviesListAdapter { view, movie ->
+    private fun createUpcomingMoviesAdapter(): MovieListAdapter {
+        return MovieListAdapter { view, movie ->
             val extras = FragmentNavigatorExtras(view to movie.posterPath)
             val action = MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(movie.id)
             navController.navigate(action, extras)
         }
     }
 
-    private fun observeViewModel(upcomingMoviesListAdapter: UpcomingMoviesListAdapter) {
+    private fun observeViewModel(movieListAdapter: MovieListAdapter) {
         viewModel.upcomingMovies.observe(viewLifecycleOwner,
-            Observer { upcomingMoviesListAdapter.addItems(it) })
+            Observer { movieListAdapter.addItems(it) })
+
     }
 }

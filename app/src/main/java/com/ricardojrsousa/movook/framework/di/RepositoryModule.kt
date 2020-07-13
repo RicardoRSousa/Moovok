@@ -1,6 +1,7 @@
 package com.ricardojrsousa.movook.framework.di
 
 import android.content.Context
+import com.ricardojrsousa.movook.core.repository.BooksRepository
 import com.ricardojrsousa.movook.core.repository.MoviesRepository
 import com.ricardojrsousa.movook.framework.DataSource
 import dagger.Module
@@ -14,4 +15,7 @@ class RepositoryModule(private val context: Context) {
 
     @Provides
     fun provideMovieRepository() = MoviesRepository(DataSource(context))
+
+    @Provides
+    fun provideBookRepository() = BooksRepository(DataSource(context))
 }

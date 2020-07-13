@@ -18,4 +18,7 @@ interface MoviesAPI {
 
     @GET("movie/{movie_id}?api_key=040509eb18929f6db970dba1c4f0f836&language=en-US")
     suspend fun getMovieDetails(@Path("movie_id") movieId: Int): MovieDetails
+
+    @GET("movie/{movie_id}/similar?api_key=040509eb18929f6db970dba1c4f0f836&language=en-US")
+    suspend fun getSimilarMovies(@Path("movie_id") movieId: Int, @Query("page") page: Int): MovieWrapper
 }

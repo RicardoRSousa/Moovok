@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/top_bar_height"
-    tools:context=".presentation.MainFragment">
+    tools:context=".presentation.main.MainFragment">
 
     <LinearLayout
         android:id="@+id/upcoming_movies_label"
@@ -43,8 +43,9 @@
         app:layout_constraintTop_toBottomOf="@id/upcoming_movies_label" />
 
     <LinearLayout
+        android:id="@+id/more_movies_options"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upcoming_movies_list">
@@ -52,7 +53,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="6dp"
             android:layout_weight="1"
             app:cardBackgroundColor="@color/alternative_red"
             app:cardCornerRadius="6dp">
@@ -86,7 +87,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_margin="6dp"
             android:layout_weight="1"
             app:cardBackgroundColor="@color/alternative_red"
             app:cardCornerRadius="6dp">
@@ -110,6 +111,39 @@
                     android:layout_marginTop="6dp"
                     android:gravity="center"
                     android:text="Top Rated Movies"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/alternative_red"
+            app:cardCornerRadius="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_popular" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="Trending Movies"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>

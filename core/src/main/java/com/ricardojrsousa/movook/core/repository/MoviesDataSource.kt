@@ -9,4 +9,5 @@ import com.ricardojrsousa.movook.core.data.MovieDetails
 interface MoviesDataSource {
     suspend fun getUpcomingMovies(page: Int): List<Movie>
     suspend fun getMovieDetails(movieId: Int): MovieDetails
+    suspend fun getSimilarMovies(movieId: Int, page: Int): List<Movie>
 }
