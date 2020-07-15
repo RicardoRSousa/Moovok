@@ -2,10 +2,7 @@ package com.ricardojrsousa.movook.framework.di
 
 import com.ricardojrsousa.movook.core.repository.BooksRepository
 import com.ricardojrsousa.movook.core.repository.MoviesRepository
-import com.ricardojrsousa.movook.core.usecase.GetMovieDetails
-import com.ricardojrsousa.movook.core.usecase.GetSimilarMovies
-import com.ricardojrsousa.movook.core.usecase.GetUpcomingMovies
-import com.ricardojrsousa.movook.core.usecase.SearchBooksByTitle
+import com.ricardojrsousa.movook.core.usecase.*
 import com.ricardojrsousa.movook.framework.BookUseCases
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import dagger.Module
@@ -19,9 +16,10 @@ class UseCaseModule {
 
     @Provides
     fun getMovieUseCases(moviesRepository: MoviesRepository) = MovieUseCases(
-        GetUpcomingMovies(moviesRepository),
+        GetMoviesInTheatres(moviesRepository),
         GetMovieDetails(moviesRepository),
-        GetSimilarMovies(moviesRepository)
+        GetSimilarMovies(moviesRepository),
+        GetPersonDetails(moviesRepository)
     )
 
     @Provides

@@ -14,6 +14,7 @@ object PicassoWrapper {
 
     private val posterPathPrefix = "https://image.tmdb.org/t/p/w500"
     private val backdropPathPrefix = "https://image.tmdb.org/t/p/w1280"
+    private val profilePathPrefix = "https://image.tmdb.org/t/p/h632"
 
     fun loadMoviePoster(url: String, view: ImageView, callback: Callback?) {
         Picasso.get()
@@ -31,7 +32,18 @@ object PicassoWrapper {
             .into(view, callback)
     }
 
-    fun loadBookCover(url: String, view: ImageView, callback: Callback? = null) {
+
+    fun loadCastProfileThumbnail(url: String?, view: ImageView, callback: Callback? = null) {
+        Picasso.get()
+            .load(profilePathPrefix + url)
+            .placeholder(R.drawable.person_placeholder)
+            .fit()
+            .transform(RoundedTransformation(10f))
+            .centerCrop()
+            .into(view, callback)
+    }
+
+    fun loadBookCover(url: String?, view: ImageView, callback: Callback? = null) {
         Picasso.get()
             .load(url)
             .placeholder(R.drawable.book_placeholder)
@@ -51,6 +63,9 @@ fun ImageView.loadMovieBackdrop(url: String?, callback: Callback? = null) {
 }
 
 fun ImageView.loadBookCover(url: String?, callback: Callback? = null) {
-    if (!url.isNullOrBlank())
-        PicassoWrapper.loadBookCover(url, this, callback)
+    PicassoWrapper.loadBookCover(url, this, callback)
+}
+
+fun ImageView.loadCastProfileThumbnail(url: String?, callback: Callback? = null) {
+    PicassoWrapper.loadCastProfileThumbnail(url, this, callback)
 }

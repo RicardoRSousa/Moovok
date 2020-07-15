@@ -1,39 +1,32 @@
-package com.ricardojrsousa.movook.viewmodel
+package com.ricardojrsousa.movook.presentation.persondetails
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ricardojrsousa.movook.framework.BookUseCases
 import com.ricardojrsousa.movook.framework.MovieUseCases
-import com.ricardojrsousa.movook.framework.di.DaggerMovieDetailsViewModelComponent
+import com.ricardojrsousa.movook.framework.di.DaggerPersonDetailsViewModelComponent
 import com.ricardojrsousa.movook.framework.di.RepositoryModule
-import com.ricardojrsousa.movook.presentation.details.MovieDetailsViewModel
 import javax.inject.Inject
 
-/**
- * Created by ricardosousa on 19/03/2020
- */
-class MovieDetailsViewModelFactory(
+class PersonDetailsViewModelFactory(
     private val applicationContext: Context,
-    private val movieId: Int
+    private val personId: Int
 ) : ViewModelProvider.Factory {
 
     @Inject
     lateinit var movieUseCases: MovieUseCases
 
-    @Inject
-    lateinit var bookUseCases: BookUseCases
 
     init {
-        DaggerMovieDetailsViewModelComponent.builder()
+        DaggerPersonDetailsViewModelComponent.builder()
             .repositoryModule(RepositoryModule(applicationContext))
             .build().inject(this)
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
-            modelClass.isAssignableFrom(MovieDetailsViewModel::class.java) ->
-                return MovieDetailsViewModel(movieUseCases, bookUseCases, movieId) as T
+            modelClass.isAssignableFrom(PersonDetailsViewModel::class.java) ->
+                return PersonDetailsViewModel(movieUseCases, personId) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
     }

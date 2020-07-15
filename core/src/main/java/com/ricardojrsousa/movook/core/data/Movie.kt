@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 open class Movie(
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     val overview: String,
     @SerializedName("release_date")
     val releaseDate: String,

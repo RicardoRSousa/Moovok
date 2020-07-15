@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/top_bar_height"
+    tools:background="@color/colorPrimary"
     tools:context=".presentation.main.MainFragment">
 
     <LinearLayout
-        android:id="@+id/upcoming_movies_label"
+        android:id="@+id/movies_in_theatres_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -20,27 +21,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Upcoming movies"
+            android:text="@string/movies_in_theatres"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/upcoming_movies_see_all_label"
+            android:visibility="gone"
+            android:id="@+id/movies_in_theatres_see_all_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="See all >"
+            android:text="@string/see_all"
             android:textColor="@android:color/white" />
-
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcoming_movies_list"
+        android:id="@+id/movies_in_theatres_list"
         android:layout_width="0dp"
-        android:layout_height="190dp"
+        android:layout_height="@dimen/poster_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/upcoming_movies_label" />
+        app:layout_constraintTop_toBottomOf="@id/movies_in_theatres_label" />
 
     <LinearLayout
         android:id="@+id/more_movies_options"
@@ -48,7 +48,7 @@
         android:layout_height="200dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upcoming_movies_list">
+        app:layout_constraintTop_toBottomOf="@+id/movies_in_theatres_list">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -76,7 +76,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="Most Popular Movies"
+                    android:text="@string/most_popular_movies"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
@@ -110,7 +110,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="Top Rated Movies"
+                    android:text="@string/top_rated_movies"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
@@ -143,7 +143,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="Trending Movies"
+                    android:text="@string/upcoming_movies"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
@@ -152,5 +152,14 @@
 
     </LinearLayout>
 
+
+    <ImageView
+        android:id="@+id/tmdb_logo"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_tmdb_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

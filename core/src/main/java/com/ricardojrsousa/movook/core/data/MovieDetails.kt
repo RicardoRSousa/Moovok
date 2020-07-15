@@ -1,7 +1,6 @@
 package com.ricardojrsousa.movook.core.data
 
 import com.google.gson.annotations.SerializedName
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,10 +35,16 @@ data class MovieDetails(
     @SerializedName("vote_average")
     val voteAverage: Double? = null,
     @SerializedName("vote_count")
-    val voteCount: Int? = null
+    val voteCount: Int? = null,
+    var credits: List<Person>,
+    var basedOnBook: Boolean
 ) {
     fun getImdbUrl(): String {
         return "https://www.imdb.com/title/{$imdbId}/"
+    }
+
+    fun getGenres(): String? {
+        return genres?.map { it.name }?.joinToString(separator = " ")
     }
 
     fun getReleaseYear(): String {

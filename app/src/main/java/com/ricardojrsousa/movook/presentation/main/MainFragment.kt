@@ -5,29 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.doOnPreDraw
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.TransitionInflater
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.presentation.BookListAdapter
-import com.ricardojrsousa.movook.presentation.MovieListAdapter
+import com.ricardojrsousa.movook.presentation.BaseFragment
+import com.ricardojrsousa.movook.presentation.adapters.MovieListAdapter
 import com.ricardojrsousa.movook.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment<MainViewModel>() {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var navController: NavController
+    override lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         viewModel = MainViewModelFactory(requireActivity().applicationContext).create(MainViewModel::class.java)
-        navController = findNavController()
     }
 
 
@@ -37,9 +30,9 @@ class MainFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        val upcomingMoviesListAdapter = createUpcomingMoviesAdapter()
-        setupRecyclerView(view, upcomingMoviesListAdapter)
-        observeViewModel(upcomingMoviesListAdapter)
+        val moviesInTheatresAdapter = createMoviesInTheatresAdapter()
+        setupRecyclerView(view, moviesInTheatresAdapter)
+        observeViewModel(moviesInTheatresAdapter)
 
         return view
     }
@@ -47,7 +40,7 @@ class MainFragment : Fragment() {
 
     private fun setupRecyclerView(view: View, movieListAdapter: MovieListAdapter) {
 
-        view.upcoming_movies_list.run {
+        view.movies_in_theatres_list.run {
             adapter = movieListAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
@@ -58,17 +51,19 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun createUpcomingMoviesAdapter(): MovieListAdapter {
+    private fun createMoviesInTheatresAdapter(): MovieListAdapter {
         return MovieListAdapter { view, movie ->
-            val extras = FragmentNavigatorExtras(view to movie.posterPath)
-            val action = MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(movie.id)
-            navController.navigate(action, extras)
+            if (movie != null) {
+                val extras = FragmentNavigatorExtras(view to movie.id.toString())
+                val action = MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(movie.id)
+                navController.navigate(action, extras)
+            }
         }
     }
 
     private fun observeViewModel(movieListAdapter: MovieListAdapter) {
-        viewModel.upcomingMovies.observe(viewLifecycleOwner,
+        viewModel.moviesInTheatres.observe(viewLifecycleOwner,
             Observer { movieListAdapter.addItems(it) })
-
     }
+
 }

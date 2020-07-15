@@ -1,9 +1,6 @@
 package com.ricardojrsousa.movook.framework.api
 
-import com.ricardojrsousa.movook.core.data.Movie
-import com.ricardojrsousa.movook.core.data.MovieDetails
-import com.ricardojrsousa.movook.core.data.MovieWrapper
-import retrofit2.Response
+import com.ricardojrsousa.movook.core.data.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -12,13 +9,30 @@ import retrofit2.http.Query
 /**
  * Created by ricardosousa on 12/03/2020
  */
-interface MoviesAPI {
-    @GET("movie/upcoming?api_key=040509eb18929f6db970dba1c4f0f836&language=en-US")
-    suspend fun getUpcomingMovies(@Query("page") page: Int): MovieWrapper
 
-    @GET("movie/{movie_id}?api_key=040509eb18929f6db970dba1c4f0f836&language=en-US")
+private const val MOVIE = "movie"
+private const val PERSON = "person"
+
+interface MoviesAPI {
+    @GET("${MOVIE}/now_playing")
+    suspend fun getMoviesInTheatres(@Query("page") page: Int): MovieWrapper
+
+    @GET("${MOVIE}/{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id") movieId: Int): MovieDetails
 
-    @GET("movie/{movie_id}/similar?api_key=040509eb18929f6db970dba1c4f0f836&language=en-US")
+    @GET("${MOVIE}/{movie_id}/credits")
+    suspend fun getMovieCast(@Path("movie_id") movieId: Int): Cast
+
+    @GET("${MOVIE}/{movie_id}/keywords")
+    suspend fun getMovieKeywords(@Path("movie_id") movieId: Int): MovieKeywordWrapper
+
+    @GET("${MOVIE}/{movie_id}/similar")
     suspend fun getSimilarMovies(@Path("movie_id") movieId: Int, @Query("page") page: Int): MovieWrapper
+
+    @GET("${PERSON}/{person_id}")
+    suspend fun getPersonDetails(@Path("person_id") personId: Int): Person
+
+    @GET("${PERSON}/{person_id}/movie_credits")
+    suspend fun getPersonMovieCredits(@Path("person_id") personId: Int): Credit
+
 }
