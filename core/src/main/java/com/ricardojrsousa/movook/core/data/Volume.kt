@@ -11,6 +11,6 @@ data class Volume(
     val categories: List<String>,
     val averageRating: Double,
     val ratingsCount: Int,
-    val imageLinks: BookImageLinks,
+    val imageLinks: BookImageLinks?,
     val language: String
 )

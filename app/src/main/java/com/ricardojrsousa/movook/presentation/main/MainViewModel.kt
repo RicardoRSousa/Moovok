@@ -6,26 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.framework.MovieUseCases
+import com.ricardojrsousa.movook.presentation.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val movieUseCases: MovieUseCases) : ViewModel() {
+class MainViewModel(private val movieUseCases: MovieUseCases) : BaseViewModel() {
 
-    private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        Log.e("Exception HANDLER", throwable.localizedMessage)
-    }
-
-    private val coroutineScope = CoroutineScope(Dispatchers.IO + exceptionHandler)
-
-    private val _upcomingMovies: MutableLiveData<List<Movie>> = MutableLiveData()
-    val upcomingMovies: LiveData<List<Movie>> = _upcomingMovies
+    private val _moviesInTheatres: MutableLiveData<List<Movie>> = MutableLiveData()
+    val moviesInTheatres: LiveData<List<Movie>> = _moviesInTheatres
 
     init {
         coroutineScope.launch {
-            val list = movieUseCases.getUpcomingMovies.invoke(1)
-            _upcomingMovies.postValue(list)
+            val list = movieUseCases.getMoviesInTheatres.invoke(1)
+            _moviesInTheatres.postValue(list)
         }
     }
 }

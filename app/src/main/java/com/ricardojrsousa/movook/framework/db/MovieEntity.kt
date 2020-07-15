@@ -14,7 +14,7 @@ import com.ricardojrsousa.movook.core.data.Movie
 @TypeConverters(MoviesTypeConverters::class)
 data class MovieEntity(
     @ColumnInfo(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     val overview: String,
     @ColumnInfo(name = "release_date")
     val releaseDate: String,

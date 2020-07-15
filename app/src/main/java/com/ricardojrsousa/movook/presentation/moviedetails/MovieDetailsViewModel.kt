@@ -1,4 +1,4 @@
-package com.ricardojrsousa.movook.presentation.details
+package com.ricardojrsousa.movook.presentation.moviedetails
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,18 +9,13 @@ import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.core.data.MovieDetails
 import com.ricardojrsousa.movook.framework.BookUseCases
 import com.ricardojrsousa.movook.framework.MovieUseCases
+import com.ricardojrsousa.movook.presentation.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val movieUseCases: MovieUseCases, private val bookUseCases: BookUseCases, private val movieId: Int) : ViewModel() {
-
-    private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        Log.e("Exception HANDLER", throwable.localizedMessage)
-    }
-
-    private val coroutineScope = CoroutineScope(Dispatchers.IO + exceptionHandler)
+class MovieDetailsViewModel(private val movieUseCases: MovieUseCases, private val bookUseCases: BookUseCases, private val movieId: Int) : BaseViewModel() {
 
     private val _movieDetails: MutableLiveData<MovieDetails> = MutableLiveData()
     val movieDetails: LiveData<MovieDetails> = _movieDetails
@@ -38,13 +33,20 @@ class MovieDetailsViewModel(private val movieUseCases: MovieUseCases, private va
 
             val similarMovies = movieUseCases.getSimilarMovies.invoke(movieId, 1)
             _similarMovies.postValue(similarMovies)
+
+            //TODO: This logic should stay or should go?
+            if (movieDetails.basedOnBook) {
+                getRelatedBooks(movieDetails.title)
+            }
         }
     }
 
-    fun getRelatedBooks(movieName: String) {
+    fun getRelatedBooks(movieName: String?) {
         coroutineScope.launch {
-            val relatedBooks = bookUseCases.searchBooksByTitle.invoke(movieName)
-            _relatedBooks.postValue(relatedBooks)
+            if (!movieName.isNullOrBlank()) {
+                val relatedBooks = bookUseCases.searchBooksByTitle.invoke(movieName)
+                _relatedBooks.postValue(relatedBooks)
+            }
         }
     }
 

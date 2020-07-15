@@ -20,6 +20,7 @@ object MoviesClient {
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
+            .addInterceptor(AuthorizationInterceptor())
             .build()
 
         val retrofit = Retrofit.Builder()

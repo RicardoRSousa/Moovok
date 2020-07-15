@@ -8,25 +8,43 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.ricardojrsousa.movook.presentation.main.MainFragment"
-        android:label="main_fragment"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="false" />
 
     </fragment>
 
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.ricardojrsousa.movook.presentation.details.MovieDetailsFragment"
-        android:label="movie_details_fragment"
+        android:name="com.ricardojrsousa.movook.presentation.moviedetails.MovieDetailsFragment"
         tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movieId"
             app:argType="integer" />
         <action
-            android:id="@+id/action_movieDetailsFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:popUpTo="@id/mainFragment" />
+            android:id="@+id/action_movieDetailsFragment_self"
+            app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_personDetailsFragment"
+            app:destination="@id/personDetailsFragment"
+            app:popUpTo="@id/movieDetailsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_person_details"
+        android:id="@+id/personDetailsFragment"
+        android:name="com.ricardojrsousa.movook.presentation.persondetails.PersonDetailsFragment">
+        <argument
+            android:name="personId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_movieDetailsFragment2"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+
 </navigation>

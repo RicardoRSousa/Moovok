@@ -4,6 +4,7 @@ import android.content.Context
 import com.ricardojrsousa.movook.core.data.Book
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.core.data.MovieDetails
+import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.core.repository.BooksDataSource
 import com.ricardojrsousa.movook.core.repository.MoviesDataSource
 import com.ricardojrsousa.movook.framework.api.BooksClient
@@ -21,20 +22,32 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
 
     private val bookService = BooksClient.apiService
 
-    override suspend fun getUpcomingMovies(page: Int): List<Movie> {
-        val movies = movieService.getUpcomingMovies(page).results
+    override suspend fun getMoviesInTheatres(page: Int): List<Movie> {
+        val movies = movieService.getMoviesInTheatres(page).results
         movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
         return movies!!
     }
 
     override suspend fun getMovieDetails(movieId: Int): MovieDetails {
-        return movieService.getMovieDetails(movieId)
+        val credits = movieService.getMovieCast(movieId).cast
+        val basedOnBook = movieService.getMovieKeywords(movieId).keywords.any { it.id == 818 || it.id == 3096 || it.id == 246466 || it.name.contains("book") || it.name.contains("novel") }
+        val movieDetails = movieService.getMovieDetails(movieId)
+        movieDetails.credits = credits
+        movieDetails.basedOnBook = basedOnBook
+        return movieDetails
     }
 
     override suspend fun getSimilarMovies(movieId: Int, page: Int): List<Movie> {
         val movies = movieService.getSimilarMovies(movieId, page).results
         movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
         return movies!!
+    }
+
+    override suspend fun getPersonDetails(personId: Int): Person {
+        val personDetails = movieService.getPersonDetails(personId)
+        val personCredits = movieService.getPersonMovieCredits(personId)
+        personDetails.credits = personCredits.apply { this.movies = this.movies.sortedByDescending { it.voteAverage } }
+        return personDetails
     }
 
     override suspend fun searchBooksByTitle(query: String): List<Book> {

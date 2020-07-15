@@ -1,4 +1,4 @@
-package com.ricardojrsousa.movook.presentation
+package com.ricardojrsousa.movook.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Book
 import com.ricardojrsousa.movook.wrappers.loadBookCover
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.book_list_item.view.*
-import kotlinx.android.synthetic.main.movie_list_item.view.*
 
 /**
  * Created by ricardosousa on 23/03/2020
@@ -28,7 +26,7 @@ class BookListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val book = items[position]
-        holder.setupView(book)
+        holder.bind(book)
     }
 
     override fun getItemCount(): Int {
@@ -45,12 +43,12 @@ class BookListAdapter(
     }
 
     inner class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        fun setupView(book: Book) {
+        internal fun bind(book: Book) {
             with(view.book_cover) {
-                loadBookCover(book.volumeInfo.imageLinks.thumbnail)
-                transitionName = book.volumeInfo.imageLinks.thumbnail
+                loadBookCover(book.volumeInfo.imageLinks?.thumbnail)
+                transitionName = book.volumeInfo.imageLinks?.thumbnail
             }
-            view.setOnClickListener { onBookClickListener?.let { it(view.book_cover, book) } }
+            view.setOnClickListener { onBookClickListener?.invoke(view.book_cover, book) }
         }
     }
 }
