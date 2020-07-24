@@ -5,7 +5,7 @@ package com.ricardojrsousa.movook.core.repository
  */
 class MoviesRepository(private val dataSource: MoviesDataSource) {
     suspend fun getMoviesInTheatres(page: Int) = dataSource.getMoviesInTheatres(page)
-    suspend fun getMovieDetails(movieId: Int) = dataSource.getMovieDetails(movieId)
-    suspend fun getSimilarMovies(movieId: Int, page: Int) = dataSource.getSimilarMovies(movieId, page)
-    suspend fun getPersonDetails(personId: Int) = dataSource.getPersonDetails(personId)
+    suspend fun getMovieDetails(movieId: String) = dataSource.getMovieDetails(movieId)
+    suspend fun getSimilarMovies(movieId: String, page: Int) = dataSource.getSimilarMovies(movieId, page)
+    suspend fun getPersonDetails(personId: String) = dataSource.getPersonDetails(personId)
 }

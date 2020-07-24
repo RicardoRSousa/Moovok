@@ -21,6 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginStart="6dp"
         android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/person_profile_image"
@@ -36,6 +37,7 @@
             tools:text="Leonardo DiCaprio" />
 
         <TextView
+            android:layout_marginTop="12dp"
             android:id="@+id/person_date_of_birth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +58,7 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_marginTop="6dp"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movieId"
-            app:argType="integer" />
+            app:argType="string" />
         <action
             android:id="@+id/action_movieDetailsFragment_self"
             app:destination="@id/movieDetailsFragment" />
@@ -32,18 +32,31 @@
             app:destination="@id/personDetailsFragment"
             app:popUpTo="@id/movieDetailsFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_bookDetailsFragment"
+            app:destination="@id/bookDetailsFragment"
+            app:popUpTo="@id/movieDetailsFragment" />
     </fragment>
 
     <fragment
-        tools:layout="@layout/fragment_person_details"
         android:id="@+id/personDetailsFragment"
-        android:name="com.ricardojrsousa.movook.presentation.persondetails.PersonDetailsFragment">
+        android:name="com.ricardojrsousa.movook.presentation.persondetails.PersonDetailsFragment"
+        tools:layout="@layout/fragment_person_details">
         <argument
             android:name="personId"
-            app:argType="integer" />
+            app:argType="string" />
         <action
-            android:id="@+id/action_personDetailsFragment_to_movieDetailsFragment2"
+            android:id="@+id/action_personDetailsFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookDetailsFragment"
+        android:name="com.ricardojrsousa.movook.presentation.bookdetails.BookDetailsFragment"
+        tools:layout="@layout/fragment_book_details">
+        <argument
+            android:name="bookId"
+            app:argType="string" />
     </fragment>
 
 

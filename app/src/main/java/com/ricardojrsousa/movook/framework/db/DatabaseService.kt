@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * Created by ricardosousa on 25/05/2020
  */
-@Database(entities = [MovieEntity::class], version = 1)
+@Database(entities = [MovieEntity::class], version = 3)
 abstract class DatabaseService : RoomDatabase() {
 
     companion object {

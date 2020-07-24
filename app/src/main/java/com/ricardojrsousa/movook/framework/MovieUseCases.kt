@@ -4,6 +4,7 @@ import com.ricardojrsousa.movook.core.usecase.GetMovieDetails
 import com.ricardojrsousa.movook.core.usecase.GetSimilarMovies
 import com.ricardojrsousa.movook.core.usecase.GetMoviesInTheatres
 import com.ricardojrsousa.movook.core.usecase.GetPersonDetails
+import javax.inject.Inject
 
 /**
  * Created by ricardosousa on 25/05/2020

@@ -1,19 +1,26 @@
 package com.ricardojrsousa.movook.presentation.persondetails
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.ricardojrsousa.movook.core.data.MovieDetails
 import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.presentation.BaseViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PersonDetailsViewModel(private val movieUseCases: MovieUseCases, personId: Int) : BaseViewModel() {
+class PersonDetailsViewModel @ViewModelInject constructor(
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val movieUseCases: MovieUseCases
+) : BaseViewModel() {
 
     private val _personDetails: MutableLiveData<Person> = MutableLiveData()
     val personDetails: LiveData<Person> = _personDetails
 
-    init {
+    fun init(personId: String) {
         coroutineScope.launch {
             val personDetails = movieUseCases.getPersonDetails(personId)
             _personDetails.postValue(personDetails)

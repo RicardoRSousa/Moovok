@@ -9,4 +9,5 @@ import com.ricardojrsousa.movook.core.data.MovieDetails
  */
 interface BooksDataSource {
     suspend fun searchBooksByTitle(title: String): List<Book>
+    suspend fun getBookDetails(id: String): Book
 }
