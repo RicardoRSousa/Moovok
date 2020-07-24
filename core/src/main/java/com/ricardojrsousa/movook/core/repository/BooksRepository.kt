@@ -5,4 +5,5 @@ package com.ricardojrsousa.movook.core.repository
  */
 class BooksRepository(private val dataSource: BooksDataSource) {
     suspend fun searchBooksByTitle(title: String) = dataSource.searchBooksByTitle(title)
+    suspend fun getBookDetails(id: String) = dataSource.getBookDetails(id)
 }

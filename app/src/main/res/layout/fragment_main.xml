@@ -26,12 +26,12 @@
             android:textSize="20sp" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/movies_in_theatres_see_all_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/see_all"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -46,45 +46,13 @@
         android:id="@+id/more_movies_options"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="22dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movies_in_theatres_list">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/alternative_red"
-            app:cardCornerRadius="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_popular" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="6dp"
-                    android:gravity="center"
-                    android:text="@string/most_popular_movies"
-                    android:textColor="@android:color/white" />
-
-            </LinearLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+            android:id="@+id/option_most_popular"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="6dp"
@@ -110,14 +78,16 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:text="@string/top_rated_movies"
+                    android:text="@string/most_popular_movies"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
 
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/option_upcoming"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="6dp"
@@ -144,6 +114,40 @@
                     android:layout_marginTop="6dp"
                     android:gravity="center"
                     android:text="@string/upcoming_movies"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/option_discover"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/alternative_red"
+            app:cardCornerRadius="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_discover" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="@string/discover"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>

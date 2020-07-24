@@ -6,16 +6,20 @@ import com.ricardojrsousa.movook.core.repository.MoviesRepository
 import com.ricardojrsousa.movook.framework.DataSource
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Singleton
 
-/**
- * Created by ricardosousa on 27/05/2020
- */
 @Module
-class RepositoryModule(private val context: Context) {
+@InstallIn(ApplicationComponent::class)
+object RepositoryModule {
 
     @Provides
-    fun provideMovieRepository() = MoviesRepository(DataSource(context))
+    @Singleton
+    fun provideMovieRepository(@ApplicationContext context: Context) = MoviesRepository(DataSource(context))
 
     @Provides
-    fun provideBookRepository() = BooksRepository(DataSource(context))
+    @Singleton
+    fun provideBookRepository(@ApplicationContext context: Context) = BooksRepository(DataSource(context))
 }

@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="VoteView">
+        <attr name="label_textSize" format="dimension" />
+        <attr name="label_textColor" format="color" />
+        <attr name="progressBar_Max" format="integer" />
+    </declare-styleable>
+</resources>

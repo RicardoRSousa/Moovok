@@ -7,15 +7,17 @@ import com.ricardojrsousa.movook.framework.BookUseCases
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Singleton
 
-/**
- * Created by ricardosousa on 27/05/2020
- */
 @Module
-class UseCaseModule {
+@InstallIn(ApplicationComponent::class)
+object UseCaseModule {
 
     @Provides
-    fun getMovieUseCases(moviesRepository: MoviesRepository) = MovieUseCases(
+    @Singleton
+    fun getMovieUseCases(moviesRepository: MoviesRepository): MovieUseCases = MovieUseCases(
         GetMoviesInTheatres(moviesRepository),
         GetMovieDetails(moviesRepository),
         GetSimilarMovies(moviesRepository),
@@ -23,7 +25,9 @@ class UseCaseModule {
     )
 
     @Provides
-    fun getBookUseCases(booksRepository: BooksRepository) = BookUseCases(
-        SearchBooksByTitle(booksRepository)
+    @Singleton
+    fun getBookUseCases(booksRepository: BooksRepository): BookUseCases = BookUseCases(
+        SearchBooksByTitle(booksRepository),
+        GetBookDetails(booksRepository)
     )
 }

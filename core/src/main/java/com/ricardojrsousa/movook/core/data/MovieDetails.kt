@@ -9,7 +9,7 @@ data class MovieDetails(
     val backdropPath: String? = null,
     val budget: Int? = null,
     val genres: List<Genre>? = null,
-    val id: Int? = null,
+    override val id: String,
     @SerializedName("imdb_id")
     val imdbId: String? = null,
     @SerializedName("original_language")
@@ -37,15 +37,11 @@ data class MovieDetails(
     @SerializedName("vote_count")
     val voteCount: Int? = null,
     var credits: List<Person>,
-    var basedOnBook: Boolean
-) {
-    fun getImdbUrl(): String {
-        return "https://www.imdb.com/title/{$imdbId}/"
-    }
+    var keywords: List<MovieKeyword>
+) : Identifiable {
+    fun getImdbUrl(): String = "https://www.imdb.com/title/{$imdbId}/"
 
-    fun getGenres(): String? {
-        return genres?.map { it.name }?.joinToString(separator = " ")
-    }
+    fun getGenres(): String? = genres?.map { it.name }?.joinToString(separator = " ")
 
     fun getReleaseYear(): String {
         val format = SimpleDateFormat("yyyy-MM-dd")
@@ -53,4 +49,8 @@ data class MovieDetails(
         cal.time = format.parse(releaseDate)
         return cal.get(Calendar.YEAR).toString()
     }
+
+    fun isBasedOnBook(): Boolean = keywords.any { it.id == 818 || it.id == 3096 || it.id == 246466 || it.name.contains("book") || it.name.contains("novel") }
+
+
 }

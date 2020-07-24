@@ -18,21 +18,21 @@ interface MoviesAPI {
     suspend fun getMoviesInTheatres(@Query("page") page: Int): MovieWrapper
 
     @GET("${MOVIE}/{movie_id}")
-    suspend fun getMovieDetails(@Path("movie_id") movieId: Int): MovieDetails
+    suspend fun getMovieDetails(@Path("movie_id") movieId: String): MovieDetails
 
     @GET("${MOVIE}/{movie_id}/credits")
-    suspend fun getMovieCast(@Path("movie_id") movieId: Int): Cast
+    suspend fun getMovieCast(@Path("movie_id") movieId: String): Cast
 
     @GET("${MOVIE}/{movie_id}/keywords")
-    suspend fun getMovieKeywords(@Path("movie_id") movieId: Int): MovieKeywordWrapper
+    suspend fun getMovieKeywords(@Path("movie_id") movieId: String): MovieKeywordWrapper
 
     @GET("${MOVIE}/{movie_id}/similar")
-    suspend fun getSimilarMovies(@Path("movie_id") movieId: Int, @Query("page") page: Int): MovieWrapper
+    suspend fun getSimilarMovies(@Path("movie_id") movieId: String, @Query("page") page: Int): MovieWrapper
 
     @GET("${PERSON}/{person_id}")
-    suspend fun getPersonDetails(@Path("person_id") personId: Int): Person
+    suspend fun getPersonDetails(@Path("person_id") personId: String): Person
 
     @GET("${PERSON}/{person_id}/movie_credits")
-    suspend fun getPersonMovieCredits(@Path("person_id") personId: Int): Credit
+    suspend fun getPersonMovieCredits(@Path("person_id") personId: String): Credit
 
 }

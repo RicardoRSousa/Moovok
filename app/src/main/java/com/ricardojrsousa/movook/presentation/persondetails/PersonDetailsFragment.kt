@@ -4,21 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.adapters.PersonDetailsViewPagerAdapter
+import com.ricardojrsousa.movook.presentation.main.MainViewModel
+import com.ricardojrsousa.movook.presentation.moviedetails.MovieDetailsFragmentDirections
 import com.ricardojrsousa.movook.wrappers.loadCastProfileThumbnail
 import com.ricardojrsousa.movook.wrappers.loadMoviePoster
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_person_details.*
 
+@AndroidEntryPoint
 class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
 
-    override lateinit var viewModel: PersonDetailsViewModel
-    private var personId: Int = 0
+    override val viewModel: PersonDetailsViewModel by viewModels()
+    private lateinit var personId: String
 
     private val args: PersonDetailsFragmentArgs by navArgs()
 
@@ -26,19 +32,14 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
         super.onCreate(savedInstanceState)
 
         personId = args.personId
-        viewModel = PersonDetailsViewModelFactory(requireActivity().applicationContext, personId).create(PersonDetailsViewModel::class.java)
+        viewModel.init(personId)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_person_details, container, false)
-
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_person_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
 
         val infoViewPagerAdapter = createInfoViewPagerAdapter()
         person_info_pager.adapter = infoViewPagerAdapter
-       // person_info_pager.recyclerView.enforceSingleScrollDirection()
+        // person_info_pager.recyclerView.enforceSingleScrollDirection()
 
         TabLayoutMediator(tab_layout, person_info_pager) { tab, position ->
             tab.text = when (position) {
@@ -67,7 +68,19 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
         observeViewModel(infoViewPagerAdapter)
     }
 
-    private fun createInfoViewPagerAdapter() = PersonDetailsViewPagerAdapter()
+    private fun createInfoViewPagerAdapter(): PersonDetailsViewPagerAdapter {
+        return PersonDetailsViewPagerAdapter { view, movies ->
+            if (movies != null) {
+                val action = PersonDetailsFragmentDirections.actionPersonDetailsFragmentToMovieDetailsFragment(movies.first().id)
+                if (view != null) {
+                    val extras = FragmentNavigatorExtras(view to movies.first().id)
+                    navController.navigate(action, extras)
+                } else {
+                    navController.navigate(action)
+                }
+            }
+        }
+    }
 
     private fun observeViewModel(inforViewPagerAdapter: PersonDetailsViewPagerAdapter) {
         viewModel.personDetails.observe(viewLifecycleOwner, Observer {
@@ -79,7 +92,9 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
     private fun setupView(person: Person) {
         person_name.text = person.name
         person_profile_image.loadCastProfileThumbnail(person.profilePath)
-        person_date_of_birth.text = person.birthday
+        if (!person.birthday.isNullOrBlank()) {
+            person_date_of_birth.text = getString(R.string.person_dob_age, person.birthday, person.getAge())
+        }
         person_place_of_birth.text = person.placeOfBirth
     }
 }

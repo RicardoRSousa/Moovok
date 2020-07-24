@@ -2,25 +2,29 @@ package com.ricardojrsousa.movook.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.presentation.BindableViewHolder
-import com.ricardojrsousa.movook.presentation.adapters.views.BiographyView
+import com.ricardojrsousa.movook.presentation.views.BiographyView
+import com.ricardojrsousa.movook.presentation.views.KnownForView
+import com.ricardojrsousa.movook.presentation.views.OtherCreditsView
 
 private const val TYPE_BIO = 0
 private const val TYPE_KNOWN_FOR = 1
 private const val TYPE_OTHER_CREDITS = 2
 
-class PersonDetailsViewPagerAdapter : RecyclerView.Adapter<PersonDetailsViewPagerAdapter.ViewHolder>() {
+class PersonDetailsViewPagerAdapter(val onMovieClickListener: ((view: ImageView?, movie: List<Movie>?) -> Unit)? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var person: Person? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            TYPE_BIO -> ViewHolder(BiographyView(layoutInflater, parent))
-            TYPE_KNOWN_FOR -> ViewHolder(BiographyView(layoutInflater, parent))
-            else -> ViewHolder(BiographyView(layoutInflater, parent))
+            TYPE_BIO -> PersonViewHolder(BiographyView().init(layoutInflater, parent))
+            TYPE_KNOWN_FOR -> MovieViewHolder(KnownForView().init(layoutInflater, parent))
+            else -> MovieViewHolder(OtherCreditsView().init(layoutInflater, parent))
         }
     }
 
@@ -29,8 +33,12 @@ class PersonDetailsViewPagerAdapter : RecyclerView.Adapter<PersonDetailsViewPage
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(person)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            TYPE_BIO -> (holder as PersonViewHolder).bind(person)
+            TYPE_KNOWN_FOR -> (holder as MovieViewHolder).bind(person!!.credits.movies.sortedByDescending { it.voteAverage }.filter { it.voteCount > 100 }.take(9))
+            else -> (holder as MovieViewHolder).bind(person!!.getCreditsByReleaseDateDescending())
+        }
     }
 
     override fun getItemViewType(position: Int): Int = when (position) {
@@ -39,9 +47,15 @@ class PersonDetailsViewPagerAdapter : RecyclerView.Adapter<PersonDetailsViewPage
         else -> TYPE_OTHER_CREDITS
     }
 
-    class ViewHolder internal constructor(private val view: BindableViewHolder<Person>) : RecyclerView.ViewHolder(view.itemView) {
+    inner class PersonViewHolder(private val view: BindableViewHolder<Person>) : RecyclerView.ViewHolder(view.itemView) {
         internal fun bind(person: Person?) {
             view.bind(person)
+        }
+    }
+
+    inner class MovieViewHolder(private val view: BindableViewHolder<List<Movie>>) : RecyclerView.ViewHolder(view.itemView) {
+        internal fun bind(movies: List<Movie>) {
+            view.bind(movies, onMovieClickListener)
         }
     }
 

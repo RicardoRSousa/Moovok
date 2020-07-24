@@ -9,10 +9,11 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import com.ricardojrsousa.movook.presentation.main.MainFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
 abstract class BaseFragment<T : BaseViewModel> : Fragment() {
 
-    abstract var viewModel: T
+    abstract val viewModel: T
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,6 @@ abstract class BaseFragment<T : BaseViewModel> : Fragment() {
 
         navController = findNavController()
     }
-
 
     fun navigate(action: NavDirections, extras: FragmentNavigator.Extras) {
         navController.navigate(action, extras)

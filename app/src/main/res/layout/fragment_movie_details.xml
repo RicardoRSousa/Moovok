@@ -11,111 +11,104 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/movie_backdrop_image"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/movie_description_header"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/backdrop_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/backdrop_height"
-            android:background="@color/backdrop_mask"
-            app:layout_constraintBottom_toBottomOf="@+id/movie_backdrop_image"
-            app:layout_constraintEnd_toEndOf="@+id/movie_backdrop_image"
-            app:layout_constraintStart_toStartOf="@+id/movie_backdrop_image"
-            app:layout_constraintTop_toTopOf="@+id/movie_backdrop_image" />
-
-        <ImageView
-            android:id="@+id/movie_poster_image"
-            android:layout_width="@dimen/poster_width"
-            android:layout_height="@dimen/poster_height"
-            android:layout_marginStart="@dimen/details_default_lateral_margin"
-            android:layout_marginTop="@dimen/top_bar_height"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            android:padding="6dp"
-            app:layout_constraintBottom_toBottomOf="@id/movie_backdrop_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster_image"
-            app:layout_constraintTop_toTopOf="@+id/movie_poster_image">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/movie_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/details_title_text_size"
-                android:textStyle="bold"
-                tools:text="O Senhor dos Anéis" />
+            <ImageView
+                android:id="@+id/movie_backdrop_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/movie_year"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/details_year_text_size"
-                tools:text="2001" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/backdrop_mask"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/movie_genres"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/details_genre_text_size"
-                tools:text="Action" />
-
-            <TextView
-                android:id="@+id/movie_runtime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/details_genre_text_size"
-                tools:text="123 min." />
-
-            <TextView
-                android:id="@+id/movie_tagline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/details_tagline_text_size"
-                tools:text="One Ring to rule them all" />
+            <ImageView
+                android:id="@+id/movie_poster_image"
+                android:layout_width="@dimen/poster_width"
+                android:layout_height="@dimen/poster_height"
+                android:layout_marginStart="@dimen/details_default_lateral_margin"
+                android:layout_marginTop="@dimen/top_bar_height"
+                android:layout_marginBottom="@dimen/details_default_lateral_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <com.github.guilhe.views.CircularProgressView
-                    android:id="@+id/movie_vote_view"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:backgroundColor="@color/colorPrimaryDark"
-                    app:max="10"
-                    app:progressBarColor="@color/colorAccent"
-                    app:progressBarRounded="true"
-                    app:progressBarThickness="4dp"
-                    app:shadow="true" />
+                android:layout_marginTop="@dimen/top_bar_height"
+                android:orientation="vertical"
+                android:padding="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/movie_poster_image"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/movie_vote_average"
+                    android:id="@+id/movie_title"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/details_title_text_size"
+                    android:textStyle="bold"
+                    tools:text="O Senhor dos Anéis" />
+
+                <TextView
+                    android:id="@+id/movie_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/details_year_text_size"
+                    tools:text="2001" />
+
+                <TextView
+                    android:id="@+id/movie_genres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/details_genre_text_size"
+                    tools:text="Action" />
+
+                <TextView
+                    android:id="@+id/movie_runtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/details_genre_text_size"
+                    tools:text="123 min." />
+
+                <TextView
+                    android:id="@+id/movie_tagline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/details_tagline_text_size"
-                    android:textStyle="bold"
-                    tools:text="8.3" />
+                    tools:text="One Ring to rule them all" />
+
+                <com.ricardojrsousa.movook.presentation.VoteView
+                    android:id="@+id/movie_vote_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
             </LinearLayout>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/movie_description"
@@ -130,14 +123,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movie_backdrop_image"
+            app:layout_constraintTop_toBottomOf="@+id/movie_description_header"
             tools:text="One Ring to rule them all, or is it?" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cast_list"
             android:layout_width="0dp"
-            android:layout_height="@dimen/poster_height"
-            android:layout_marginTop="6dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/details_default_horizontal_margin"
             android:layout_marginBottom="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

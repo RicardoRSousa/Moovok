@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_marginTop="@dimen/top_bar_height"
+    tools:background="@color/colorPrimary">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/book_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/book_cover_image"
+                android:layout_width="@dimen/poster_width"
+                android:layout_height="@dimen/poster_height"
+                android:layout_marginStart="@dimen/details_default_lateral_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/book_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/details_default_lateral_margin"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/book_cover_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="The Way of Kings" />
+
+            <TextView
+                android:id="@+id/book_year"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/details_default_lateral_margin"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_year_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/book_cover_image"
+                app:layout_constraintTop_toBottomOf="@id/book_title"
+                tools:text="Brandon Sanderson" />
+
+            <TextView
+                android:id="@+id/book_author"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/details_default_lateral_margin"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_year_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/book_cover_image"
+                app:layout_constraintTop_toBottomOf="@id/book_year"
+                tools:text="2010" />
+
+            <com.ricardojrsousa.movook.presentation.VoteView
+                android:id="@+id/book_rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/details_default_lateral_margin"
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toEndOf="@+id/book_cover_image"
+                app:layout_constraintTop_toBottomOf="@+id/book_author"
+                app:progressBar_Max="5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:justificationMode="inter_word"
+            android:id="@+id/book_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/details_default_lateral_margin"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="@dimen/details_default_lateral_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/details_tagline_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/book_header"
+            tools:text="DESSSSSC" />
+
+        <LinearLayout
+            android:id="@+id/page_count_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/details_default_lateral_margin"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/book_description">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Page count: "
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/book_page_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                tools:text="890" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/category_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/details_default_lateral_margin"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/page_count_section">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Categories: "
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/book_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                tools:text="Action" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/isbn_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/details_default_lateral_margin"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_section">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="ISBN: "
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/book_isbn13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                tools:text="1234567890987" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/publisher_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/details_default_lateral_margin"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/isbn_section">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Publisher: "
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/book_publisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:text="TOR Books"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/details_tagline_text_size" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

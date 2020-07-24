@@ -28,22 +28,22 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return movies!!
     }
 
-    override suspend fun getMovieDetails(movieId: Int): MovieDetails {
+    override suspend fun getMovieDetails(movieId: String): MovieDetails {
         val credits = movieService.getMovieCast(movieId).cast
-        val basedOnBook = movieService.getMovieKeywords(movieId).keywords.any { it.id == 818 || it.id == 3096 || it.id == 246466 || it.name.contains("book") || it.name.contains("novel") }
+        val keywords = movieService.getMovieKeywords(movieId).keywords
         val movieDetails = movieService.getMovieDetails(movieId)
         movieDetails.credits = credits
-        movieDetails.basedOnBook = basedOnBook
+        movieDetails.keywords = keywords
         return movieDetails
     }
 
-    override suspend fun getSimilarMovies(movieId: Int, page: Int): List<Movie> {
+    override suspend fun getSimilarMovies(movieId: String, page: Int): List<Movie> {
         val movies = movieService.getSimilarMovies(movieId, page).results
         movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
         return movies!!
     }
 
-    override suspend fun getPersonDetails(personId: Int): Person {
+    override suspend fun getPersonDetails(personId: String): Person {
         val personDetails = movieService.getPersonDetails(personId)
         val personCredits = movieService.getPersonMovieCredits(personId)
         personDetails.credits = personCredits.apply { this.movies = this.movies.sortedByDescending { it.voteAverage } }
@@ -54,5 +54,11 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         val books = bookService.searchBooksByTitle(query)
         //TODO: Save on db
         return books.items
+    }
+
+    override suspend fun getBookDetails(id: String): Book {
+        val book = bookService.getBookById(id)
+        //TODO: Save on db
+        return book
     }
 }
