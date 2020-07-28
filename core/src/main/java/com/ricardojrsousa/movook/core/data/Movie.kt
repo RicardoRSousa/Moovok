@@ -25,7 +25,8 @@ open class Movie(
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
+    val adult: Boolean
 ) : Identifiable {
 
     fun getReleaseDate(): Calendar? {
@@ -38,6 +39,6 @@ open class Movie(
         return null
     }
 
-    fun getReleaseYear(): String = getReleaseDate()?.get(Calendar.YEAR).toString()
+    fun getReleaseYear(): String = getReleaseDate()?.get(Calendar.YEAR)?.toString() ?: ""
 
 }

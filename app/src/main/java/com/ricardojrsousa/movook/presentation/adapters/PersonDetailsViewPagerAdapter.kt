@@ -36,8 +36,8 @@ class PersonDetailsViewPagerAdapter(val onMovieClickListener: ((view: ImageView?
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             TYPE_BIO -> (holder as PersonViewHolder).bind(person)
-            TYPE_KNOWN_FOR -> (holder as MovieViewHolder).bind(person!!.credits.movies.sortedByDescending { it.voteAverage }.filter { it.voteCount > 100 }.take(9))
-            else -> (holder as MovieViewHolder).bind(person!!.getCreditsByReleaseDateDescending())
+            TYPE_KNOWN_FOR -> (holder as MovieViewHolder).bind(person?.credits?.getPopularMovies(9, 100))
+            else -> (holder as MovieViewHolder).bind(person?.getCreditsByReleaseDateDescending())
         }
     }
 
@@ -54,7 +54,8 @@ class PersonDetailsViewPagerAdapter(val onMovieClickListener: ((view: ImageView?
     }
 
     inner class MovieViewHolder(private val view: BindableViewHolder<List<Movie>>) : RecyclerView.ViewHolder(view.itemView) {
-        internal fun bind(movies: List<Movie>) {
+        internal fun bind(movies: List<Movie>?) {
+
             view.bind(movies, onMovieClickListener)
         }
     }

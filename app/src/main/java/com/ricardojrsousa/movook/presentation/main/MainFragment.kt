@@ -1,9 +1,7 @@
 package com.ricardojrsousa.movook.presentation.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
@@ -20,25 +18,17 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<MainViewModel>() {
+class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
     override val viewModel: MainViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val moviesInTheatresAdapter = createMoviesInTheatresAdapter()
         setupRecyclerView(view, moviesInTheatresAdapter)
         observeViewModel(moviesInTheatresAdapter)
 
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         setupView()
     }
 
@@ -64,6 +54,7 @@ class MainFragment : BaseFragment<MainViewModel>() {
 
     private fun createMoviesInTheatresAdapter(): BindableViewListAdapter<Movie> {
         return BindableViewListAdapter(MoviePosterView()) { view, movie ->
+            showLoading()
             if (movie != null) {
                 val action = MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(movie.id)
                 if (view != null) {

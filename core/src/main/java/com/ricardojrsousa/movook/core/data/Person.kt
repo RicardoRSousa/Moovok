@@ -23,7 +23,8 @@ data class Person(
     @SerializedName("place_of_birth")
     val placeOfBirth: String?,
     val imdbId: String,
-    var credits: Credit
+    var credits: Credit,
+    val adult: Boolean
 ) : Identifiable {
 
     fun getAge(): String {
