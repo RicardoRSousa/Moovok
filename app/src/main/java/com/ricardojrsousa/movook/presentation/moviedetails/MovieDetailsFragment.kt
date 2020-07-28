@@ -12,10 +12,7 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.core.data.Book
-import com.ricardojrsousa.movook.core.data.Movie
-import com.ricardojrsousa.movook.core.data.MovieDetails
-import com.ricardojrsousa.movook.core.data.Person
+import com.ricardojrsousa.movook.core.data.*
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.adapters.BindableViewListAdapter
 import com.ricardojrsousa.movook.presentation.main.MainFragmentDirections
@@ -38,7 +35,7 @@ import kotlinx.android.synthetic.main.fragment_movie_details.view.related_books_
 import kotlinx.android.synthetic.main.fragment_movie_details.view.similar_movies_list
 
 @AndroidEntryPoint
-class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
+class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragment_movie_details) {
 
     override val viewModel: MovieDetailsViewModel by viewModels()
     private lateinit var movieId: String
@@ -52,21 +49,13 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
         viewModel.init(movieId)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_movie_details, container, false)
-        postponeEnterTransition()
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val similarMoviesAdapter = createSimilarMoviesAdapter()
         val relatedBooksAdapter = createRelatedBooksAdapter()
         val castAdapter = createCastAdapter()
 
         setupRecyclerView(view, similarMoviesAdapter, relatedBooksAdapter, castAdapter)
         observeViewModel(similarMoviesAdapter, relatedBooksAdapter, castAdapter)
-
-        return view
     }
 
     private fun setupRecyclerView(
@@ -92,6 +81,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
 
     private fun createSimilarMoviesAdapter(): BindableViewListAdapter<Movie> =
         BindableViewListAdapter(MoviePosterView()) { view, movie ->
+            showLoading()
             if (movie != null) {
                 val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(movie.id)
                 if (view != null) {
@@ -106,6 +96,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
     private fun createRelatedBooksAdapter(): BindableViewListAdapter<Book> =
         BindableViewListAdapter(BookCoverView()) { view, book ->
             //if (view != null) {
+            showLoading()
             val extras = FragmentNavigatorExtras(view as ImageView to book!!.id)
             val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToBookDetailsFragment(book.id)
             navController.navigate(action, extras)
@@ -114,8 +105,8 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>() {
 
     private fun createCastAdapter(): BindableViewListAdapter<Person> =
         BindableViewListAdapter(CastPersonView()) { view, person ->
+            showLoading()
             if (person != null) {
-                //val extras = FragmentNavigatorExtras(view to movie.posterPath)
                 val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPersonDetailsFragment(person.id)
                 navController.navigate(action)
             }

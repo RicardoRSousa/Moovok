@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "911698344070",
+    "firebase_url": "https://movook-cab56.firebaseio.com",
+    "project_id": "movook-cab56",
+    "storage_bucket": "movook-cab56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911698344070:android:ec55c0476e9287bf7a3907",
+        "android_client_info": {
+          "package_name": "com.ricardojrsousa.movook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911698344070-0ijbu0oal5tb5jiks46hti2pv4sss0f2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsj-x7UeThq3bIo4VBuAdYToqtTmIkpTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911698344070-0ijbu0oal5tb5jiks46hti2pv4sss0f2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

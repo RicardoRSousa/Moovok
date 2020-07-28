@@ -44,13 +44,16 @@ data class MovieDetails(
     fun getGenres(): String? = genres?.map { it.name }?.joinToString(separator = " ")
 
     fun getReleaseYear(): String {
-        val format = SimpleDateFormat("yyyy-MM-dd")
-        val cal = Calendar.getInstance()
-        cal.time = format.parse(releaseDate)
-        return cal.get(Calendar.YEAR).toString()
+        if (!releaseDate.isNullOrEmpty()) {
+            val format = SimpleDateFormat("yyyy-MM-dd")
+            val cal = Calendar.getInstance()
+            cal.time = format.parse(releaseDate)
+            return cal.get(Calendar.YEAR).toString()
+        }
+        return ""
     }
 
-    fun isBasedOnBook(): Boolean = keywords.any { it.id == 818 || it.id == 3096 || it.id == 246466 || it.name.contains("book") || it.name.contains("novel") }
+    fun isBasedOnBook(): Boolean = keywords.any { it.id == 818 || it.id == 3096 || it.id == 246466 || it.name.contains("novel") }
 
 
 }

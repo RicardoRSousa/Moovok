@@ -23,13 +23,13 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
     private val bookService = BooksClient.apiService
 
     override suspend fun getMoviesInTheatres(page: Int): List<Movie> {
-        val movies = movieService.getMoviesInTheatres(page).results
+        val movies = movieService.getMoviesInTheatres(page).results.filterAdult()
         movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
         return movies!!
     }
 
     override suspend fun getMovieDetails(movieId: String): MovieDetails {
-        val credits = movieService.getMovieCast(movieId).cast
+        val credits = movieService.getMovieCast(movieId).cast.filter { !it.adult }
         val keywords = movieService.getMovieKeywords(movieId).keywords
         val movieDetails = movieService.getMovieDetails(movieId)
         movieDetails.credits = credits
@@ -38,7 +38,7 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
     }
 
     override suspend fun getSimilarMovies(movieId: String, page: Int): List<Movie> {
-        val movies = movieService.getSimilarMovies(movieId, page).results
+        val movies = movieService.getSimilarMovies(movieId, page).results.filterAdult()
         movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
         return movies!!
     }
@@ -46,7 +46,7 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
     override suspend fun getPersonDetails(personId: String): Person {
         val personDetails = movieService.getPersonDetails(personId)
         val personCredits = movieService.getPersonMovieCredits(personId)
-        personDetails.credits = personCredits.apply { this.movies = this.movies.sortedByDescending { it.voteAverage } }
+        personDetails.credits = personCredits.apply { this.movies = this.movies.filterAdult().sortedByDescending { it.voteAverage } }
         return personDetails
     }
 
@@ -61,4 +61,6 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         //TODO: Save on db
         return book
     }
+
+    private fun List<Movie>.filterAdult(): List<Movie> = this.filter { !it.adult }
 }

@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_person_details.*
 
 @AndroidEntryPoint
-class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
+class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>(R.layout.fragment_person_details) {
 
     override val viewModel: PersonDetailsViewModel by viewModels()
     private lateinit var personId: String
@@ -35,19 +35,12 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
         viewModel.init(personId)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_person_details, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        startPostponedEnterTransition()
 
         val infoViewPagerAdapter = createInfoViewPagerAdapter()
         person_info_pager.adapter = infoViewPagerAdapter
-        // person_info_pager.recyclerView.enforceSingleScrollDirection()
 
         TabLayoutMediator(tab_layout, person_info_pager) { tab, position ->
             tab.text = when (position) {
@@ -57,19 +50,12 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>() {
             }
         }.attach()
 
-        /* val similarMoviesAdapter = createSimilarMoviesAdapter()
-         val relatedBooksAdapter = createRelatedBooksAdapter()
-         val castAdapter = createCastAdapter()
-
-         setupRecyclerView(view, similarMoviesAdapter, relatedBooksAdapter, castAdapter)
-         observeViewModel(similarMoviesAdapter, relatedBooksAdapter, castAdapter)
-         postponeEnterTransition()*/
-
         observeViewModel(infoViewPagerAdapter)
     }
 
     private fun createInfoViewPagerAdapter(): PersonDetailsViewPagerAdapter {
         return PersonDetailsViewPagerAdapter { view, movies ->
+            showLoading()
             if (movies != null) {
                 val action = PersonDetailsFragmentDirections.actionPersonDetailsFragmentToMovieDetailsFragment(movies.first().id)
                 if (view != null) {

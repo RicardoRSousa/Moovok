@@ -29,12 +29,13 @@ data class MovieEntity(
     @ColumnInfo(name = "vote_average")
     val voteAverage: Double,
     @ColumnInfo(name = "vote_count")
-    val voteCount: Int
+    val voteCount: Int,
+    val adult: Boolean
 ) {
     companion object {
         fun fromMovie(movie: Movie) = MovieEntity(
             movie.posterPath, movie.overview, movie.releaseDate, movie.genreIds, movie.id,
-            movie.originalTitle, movie.title, movie.popularity, movie.voteAverage, movie.voteCount
+            movie.originalTitle, movie.title, movie.popularity, movie.voteAverage, movie.voteCount, movie.adult
         )
     }
 
@@ -48,6 +49,7 @@ data class MovieEntity(
         title,
         popularity,
         voteAverage,
-        voteCount
+        voteCount,
+        adult
     )
 }
