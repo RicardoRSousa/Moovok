@@ -1,16 +1,14 @@
 package com.ricardojrsousa.movook.framework
 
 import android.content.Context
-import com.ricardojrsousa.movook.core.data.Book
-import com.ricardojrsousa.movook.core.data.Movie
-import com.ricardojrsousa.movook.core.data.MovieDetails
-import com.ricardojrsousa.movook.core.data.Person
+import com.ricardojrsousa.movook.core.data.*
 import com.ricardojrsousa.movook.core.repository.BooksDataSource
 import com.ricardojrsousa.movook.core.repository.MoviesDataSource
 import com.ricardojrsousa.movook.framework.api.BooksClient
 import com.ricardojrsousa.movook.framework.api.MoviesClient
 import com.ricardojrsousa.movook.framework.db.DatabaseService
 import com.ricardojrsousa.movook.framework.db.MovieEntity
+import com.ricardojrsousa.movook.utils.filterAdult
 
 /**
  * Created by ricardosousa on 25/05/2020
@@ -22,10 +20,10 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
 
     private val bookService = BooksClient.apiService
 
-    override suspend fun getMoviesInTheatres(page: Int): List<Movie> {
-        val movies = movieService.getMoviesInTheatres(page).results.filterAdult()
-        movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
-        return movies!!
+    override suspend fun getMoviesInTheatres(page: Int): MovieWrapper {
+        val movieWrapper = movieService.getMoviesInTheatres(page)
+        movieWrapper.results.filterAdult().forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
+        return movieWrapper
     }
 
     override suspend fun getMovieDetails(movieId: String): MovieDetails {
@@ -37,10 +35,10 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return movieDetails
     }
 
-    override suspend fun getSimilarMovies(movieId: String, page: Int): List<Movie> {
-        val movies = movieService.getSimilarMovies(movieId, page).results.filterAdult()
-        movies.forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
-        return movies!!
+    override suspend fun getSimilarMovies(movieId: String, page: Int): MovieWrapper {
+        val movieWrapper = movieService.getSimilarMovies(movieId, page)
+        movieWrapper.results.filterAdult().forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
+        return movieWrapper
     }
 
     override suspend fun getPersonDetails(personId: String): Person {
@@ -62,5 +60,5 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return book
     }
 
-    private fun List<Movie>.filterAdult(): List<Movie> = this.filter { !it.adult }
+
 }

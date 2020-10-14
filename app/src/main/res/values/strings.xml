@@ -9,7 +9,7 @@
     <string name="trending_movies">Trending Movies</string>
     <string name="upcoming_movies">Upcoming movies</string>
 
-    <string name="person_dob_age">%1$s (%2$s years)</string>
+    <string name="person_dob_age">%1$s - %2$s (%3$s years)</string>
     <string name="discover">Discover</string>
     <string name="coming_soon">Coming soon!</string>
     <string name="no_biography_available">No biography available</string>

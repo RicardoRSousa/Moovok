@@ -1,9 +1,12 @@
 package com.ricardojrsousa.movook.utils
 
 import android.content.res.Resources
+import com.ricardojrsousa.movook.core.data.Movie
 
 val Int.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
 val Float.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+
+fun List<Movie>.filterAdult(): List<Movie> = this.filter { !it.adult }

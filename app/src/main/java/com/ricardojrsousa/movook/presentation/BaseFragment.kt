@@ -24,9 +24,10 @@ abstract class BaseFragment<T : BaseViewModel>(private val contentLayout: Int) :
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
         sharedElementReturnTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = findNavController()
-
     }
 
     fun navigate(action: NavDirections, extras: FragmentNavigator.Extras) {
@@ -45,6 +46,7 @@ abstract class BaseFragment<T : BaseViewModel>(private val contentLayout: Int) :
     }
 
     fun showLoading() {
+        hideLoading()
         rootView.addView(loadingView)
     }
 

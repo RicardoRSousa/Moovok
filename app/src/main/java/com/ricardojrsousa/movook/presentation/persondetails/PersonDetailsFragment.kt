@@ -79,7 +79,7 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>(R.layout.frag
         person_name.text = person.name
         person_profile_image.loadCastProfileThumbnail(person.profilePath)
         if (!person.birthday.isNullOrBlank()) {
-            person_date_of_birth.text = getString(R.string.person_dob_age, person.birthday, person.getAge())
+            person_date_of_birth.text = getString(R.string.person_dob_age, person.getDateFormated(person.birthday), person.getDateFormated(person.deathday), person.getAge())
         }
         person_place_of_birth.text = person.placeOfBirth
     }

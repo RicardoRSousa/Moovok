@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
@@ -49,6 +50,21 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
             doOnPreDraw {
                 startPostponedEnterTransition()
             }
+
+            addOnScrollListener(object : PaginationScrollListener(layoutManager as LinearLayoutManager) {
+                override fun isLastPage(): Boolean {
+                    return viewModel.isLastPage()
+                }
+
+                override fun isLoading(): Boolean {
+                    return false
+                }
+
+                override fun loadNextPage() {
+                    viewModel.loadNextPageOfNowPlayingMovies()
+                }
+
+            })
         }
     }
 
