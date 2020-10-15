@@ -3,6 +3,7 @@ package com.ricardojrsousa.movook.wrappers
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -21,9 +22,9 @@ import kotlin.annotation.Target as Target1
  */
 object PicassoWrapper {
 
-    private val posterPathPrefix = "https://image.tmdb.org/t/p/w500"
-    private val backdropPathPrefix = "https://image.tmdb.org/t/p/w1280"
-    private val profilePathPrefix = "https://image.tmdb.org/t/p/h632"
+    private const val posterPathPrefix = "https://image.tmdb.org/t/p/w500"
+    private const val backdropPathPrefix = "https://image.tmdb.org/t/p/w1280"
+    private const val profilePathPrefix = "https://image.tmdb.org/t/p/h632"
 
     fun loadMoviePoster(url: String?, view: ImageView, callback: Callback?) {
         Picasso.get()
@@ -43,20 +44,27 @@ object PicassoWrapper {
 
     fun loadImageAsViewGroupBackground(url: String?, viewGroup: ViewGroup, callback: Callback? = null) {
         Picasso.get()
-            .load(backdropPathPrefix + url)
-            //.fit()
-            //
-            // .centerCrop()
+            .load(url)
             .into(object : Target {
                 override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
 
-                override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {}
+                override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                    Log.e("Picasso", e?.message)
+                }
 
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
                     viewGroup.background = BitmapDrawable(viewGroup.resources, bitmap)
                 }
 
             })
+    }
+
+    fun load(url: String?, view: ImageView, callback: Callback? = null){
+        Picasso.get()
+            .load(url)
+            .fit()
+            .centerCrop()
+            .into(view, callback)
     }
 
 
@@ -93,6 +101,10 @@ fun ImageView.loadBookCover(url: String?, callback: Callback? = null) {
 
 fun ImageView.loadCastProfileThumbnail(url: String?, callback: Callback? = null) {
     PicassoWrapper.loadCastProfileThumbnail(url, this, callback)
+}
+
+fun ImageView.loadImage(url: String?, callback: Callback? = null) {
+    PicassoWrapper.load(url, this, callback)
 }
 
 fun ConstraintLayout.loadBackdrop(url: String?, callback: Callback? = null) {

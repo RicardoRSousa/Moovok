@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
@@ -29,7 +27,7 @@ class MoviePosterView() : BindableViewHolder<Movie> {
         this.itemView = itemView
     }
 
-    override fun bind(movie: Movie?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
+    override fun bind(movie: Movie?, position: Int?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
         with(itemView.movie_poster) {
             loadMoviePoster(movie?.posterPath)
         }

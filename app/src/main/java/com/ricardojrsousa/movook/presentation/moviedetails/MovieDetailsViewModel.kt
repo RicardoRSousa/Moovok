@@ -13,6 +13,7 @@ import com.ricardojrsousa.movook.core.data.MovieDetails
 import com.ricardojrsousa.movook.framework.BookUseCases
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.presentation.BaseViewModel
+import com.ricardojrsousa.movook.utils.filterAdult
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +40,7 @@ class MovieDetailsViewModel @ViewModelInject constructor(
             _movieDetails.postValue(movieDetails)
 
             val similarMovies = movieUseCases.getSimilarMovies.invoke(movieId, 1)
-            _similarMovies.postValue(similarMovies)
+            _similarMovies.postValue(similarMovies.results.filterAdult())
 
             //TODO: This logic should stay or should go?
             if (movieDetails.isBasedOnBook()) {

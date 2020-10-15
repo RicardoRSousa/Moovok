@@ -50,6 +50,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val similarMoviesAdapter = createSimilarMoviesAdapter()
         val relatedBooksAdapter = createRelatedBooksAdapter()
         val castAdapter = createCastAdapter()

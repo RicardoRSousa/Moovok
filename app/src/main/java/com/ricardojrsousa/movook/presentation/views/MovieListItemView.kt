@@ -13,7 +13,7 @@ class MovieListItemView : BindableViewHolder<Movie> {
 
     override lateinit var itemView: View
 
-    override fun bind(movie: Movie?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
+    override fun bind(movie: Movie?, position: Int?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
         itemView.credit_movie_title.text = movie?.originalTitle
         itemView.credit_movie_year.text = movie?.getReleaseYear()
         if (movie?.voteAverage != null) {
