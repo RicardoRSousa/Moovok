@@ -14,6 +14,9 @@ import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.adapters.BindableViewListAdapter
 import com.ricardojrsousa.movook.presentation.views.MoviePosterView
+import com.ricardojrsousa.movook.wrappers.PicassoWrapper
+import com.ricardojrsousa.movook.wrappers.loadBookCover
+import com.ricardojrsousa.movook.wrappers.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
@@ -35,8 +38,8 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
     private fun setupView() {
         option_discover.setOnClickListener { showComingSoonToast() }
-        option_most_popular.setOnClickListener { showComingSoonToast() }
         option_upcoming.setOnClickListener { showComingSoonToast() }
+        option_most_popular.setOnClickListener { navigate(MainFragmentDirections.actionMainFragmentToPopularMoviesFragment()) }
     }
 
     private fun showComingSoonToast() = Toast.makeText(requireContext(), R.string.coming_soon, Toast.LENGTH_LONG).show()
@@ -57,7 +60,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
                 }
 
                 override fun isLoading(): Boolean {
-                    return false
+                    return viewModel.isLoading()
                 }
 
                 override fun loadNextPage() {
@@ -69,23 +72,28 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     }
 
     private fun createMoviesInTheatresAdapter(): BindableViewListAdapter<Movie> {
-        return BindableViewListAdapter(MoviePosterView()) { view, movie ->
+        val adapter = BindableViewListAdapter(MoviePosterView()) { view, movie ->
             showLoading()
             if (movie != null) {
                 val action = MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(movie.id)
                 if (view != null) {
                     val extras = FragmentNavigatorExtras(view to movie.id)
-                    navController.navigate(action, extras)
+                    navigate(action, extras)
                 } else {
-                    navController.navigate(action)
+                    navigate(action)
                 }
             }
         }
+        adapter.addItems(viewModel.loadedItems)
+        return adapter
     }
 
     private fun observeViewModel(movieListAdapter: BindableViewListAdapter<Movie>) {
-        viewModel.moviesInTheatres.observe(viewLifecycleOwner,
-            Observer { movieListAdapter.addItems(it) })
+        viewModel.moviesInTheatres.observe(viewLifecycleOwner, { movieListAdapter.addItems(it) })
+
+        viewModel.popularMovieBackdrop.observe(viewLifecycleOwner, {
+            options_most_popular_background.loadImage(it)
+        })
     }
 
 }

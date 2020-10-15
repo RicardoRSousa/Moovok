@@ -1,7 +1,6 @@
 package com.ricardojrsousa.movook.presentation.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.core.data.Identifiable
 import com.ricardojrsousa.movook.presentation.BindableViewHolder
-import com.ricardojrsousa.movook.utils.DiffCallback
 
 
 /**
@@ -26,7 +24,7 @@ class BindableViewListAdapter<T : Identifiable>(val view: BindableViewHolder<T>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount(): Int {
@@ -43,8 +41,8 @@ class BindableViewListAdapter<T : Identifiable>(val view: BindableViewHolder<T>,
     }
 
     inner class ViewHolder internal constructor(private val view: BindableViewHolder<T>) : RecyclerView.ViewHolder(view.itemView) {
-        internal fun bind(item: T?) {
-            view.bind(item, onClickListener)
+        internal fun bind(item: T?, position: Int) {
+            view.bind(item, position, onClickListener)
         }
     }
 

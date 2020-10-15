@@ -20,6 +20,9 @@ interface MoviesAPI {
     @GET("${MOVIE}/{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id") movieId: String): MovieDetails
 
+    @GET("${MOVIE}/popular")
+    suspend fun getPopularMovies(): MovieWrapper
+
     @GET("${MOVIE}/{movie_id}/credits")
     suspend fun getMovieCast(@Path("movie_id") movieId: String): Cast
 

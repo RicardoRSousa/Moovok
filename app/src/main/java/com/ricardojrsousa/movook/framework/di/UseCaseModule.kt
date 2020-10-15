@@ -21,7 +21,9 @@ object UseCaseModule {
         GetMoviesInTheatres(moviesRepository),
         GetMovieDetails(moviesRepository),
         GetSimilarMovies(moviesRepository),
-        GetPersonDetails(moviesRepository)
+        GetPersonDetails(moviesRepository),
+        GetPopularMovies(moviesRepository),
+        GetPopularMoviesBackdrops(moviesRepository)
     )
 
     @Provides

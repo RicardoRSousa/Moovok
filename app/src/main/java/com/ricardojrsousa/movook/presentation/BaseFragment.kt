@@ -34,6 +34,10 @@ abstract class BaseFragment<T : BaseViewModel>(private val contentLayout: Int) :
         navController.navigate(action, extras)
     }
 
+    fun navigate(action: NavDirections) {
+        navController.navigate(action)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_base, container, false) as FrameLayout
         loadingView = inflater.inflate(R.layout.fragment_loading, rootView, false)

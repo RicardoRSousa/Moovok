@@ -56,7 +56,7 @@ class PersonDetailsViewPagerAdapter(val onMovieClickListener: ((view: ImageView?
     inner class MovieViewHolder(private val view: BindableViewHolder<List<Movie>>) : RecyclerView.ViewHolder(view.itemView) {
         internal fun bind(movies: List<Movie>?) {
 
-            view.bind(movies, onMovieClickListener)
+            view.bind(movies, clickListener = onMovieClickListener)
         }
     }
 

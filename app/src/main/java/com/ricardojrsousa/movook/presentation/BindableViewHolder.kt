@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 interface BindableViewHolder<T> {
-    val itemView: View
+    var itemView: View
     fun init(layoutInflater: LayoutInflater, container: ViewGroup?): BindableViewHolder<T>
-    fun bind(t: T?, clickListener: ((view: ImageView?, t: T?) -> Unit)? = null)
+    fun bind(t: T?, position: Int? = 0, clickListener: ((view: ImageView?, t: T?) -> Unit)? = null)
 }

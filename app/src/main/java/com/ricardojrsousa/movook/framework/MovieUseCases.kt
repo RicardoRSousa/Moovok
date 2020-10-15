@@ -1,9 +1,6 @@
 package com.ricardojrsousa.movook.framework
 
-import com.ricardojrsousa.movook.core.usecase.GetMovieDetails
-import com.ricardojrsousa.movook.core.usecase.GetSimilarMovies
-import com.ricardojrsousa.movook.core.usecase.GetMoviesInTheatres
-import com.ricardojrsousa.movook.core.usecase.GetPersonDetails
+import com.ricardojrsousa.movook.core.usecase.*
 import javax.inject.Inject
 
 /**
@@ -13,5 +10,7 @@ data class MovieUseCases(
     val getMoviesInTheatres: GetMoviesInTheatres,
     val getMovieDetails: GetMovieDetails,
     val getSimilarMovies: GetSimilarMovies,
-    val getPersonDetails: GetPersonDetails
+    val getPersonDetails: GetPersonDetails,
+    val getPopularMovies: GetPopularMovies,
+    val getPopularMoviesBackdrops: GetPopularMoviesBackdrops
 )

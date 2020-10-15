@@ -13,4 +13,6 @@
     <string name="discover">Discover</string>
     <string name="coming_soon">Coming soon!</string>
     <string name="no_biography_available">No biography available</string>
+
+    <string name="most_popular_desc">Most popular movies. This list is updated daily.</string>
 </resources>

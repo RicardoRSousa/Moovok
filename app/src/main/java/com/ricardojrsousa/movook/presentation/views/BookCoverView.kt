@@ -14,7 +14,7 @@ class BookCoverView : BindableViewHolder<Book> {
 
     override lateinit var itemView: View
 
-    override fun bind(book: Book?, clickListener: ((view: ImageView?, t: Book?) -> Unit)?) {
+    override fun bind(book: Book?, position: Int?, clickListener: ((view: ImageView?, t: Book?) -> Unit)?) {
         with(itemView.book_cover) {
             loadBookCover(book?.volumeInfo?.imageLinks?.thumbnail)
             transitionName = book?.id
