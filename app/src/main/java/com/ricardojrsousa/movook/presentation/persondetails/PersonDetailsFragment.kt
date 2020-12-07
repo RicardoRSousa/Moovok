@@ -1,9 +1,7 @@
 package com.ricardojrsousa.movook.presentation.persondetails
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -12,11 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.presentation.BaseFragment
-import com.ricardojrsousa.movook.presentation.adapters.PersonDetailsViewPagerAdapter
-import com.ricardojrsousa.movook.presentation.main.MainViewModel
-import com.ricardojrsousa.movook.presentation.moviedetails.MovieDetailsFragmentDirections
 import com.ricardojrsousa.movook.wrappers.loadCastProfileThumbnail
-import com.ricardojrsousa.movook.wrappers.loadMoviePoster
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_person_details.*
 
@@ -60,9 +54,9 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>(R.layout.frag
                 val action = PersonDetailsFragmentDirections.actionPersonDetailsFragmentToMovieDetailsFragment(movies.first().id)
                 if (view != null) {
                     val extras = FragmentNavigatorExtras(view to movies.first().id)
-                    navController.navigate(action, extras)
+                    navigate(action, extras)
                 } else {
-                    navController.navigate(action)
+                    navigate(action)
                 }
             }
         }

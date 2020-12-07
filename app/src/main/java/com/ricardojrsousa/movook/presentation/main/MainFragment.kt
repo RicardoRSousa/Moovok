@@ -3,19 +3,16 @@ package com.ricardojrsousa.movook.presentation.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
-import com.ricardojrsousa.movook.presentation.adapters.BindableViewListAdapter
-import com.ricardojrsousa.movook.presentation.views.MoviePosterView
-import com.ricardojrsousa.movook.wrappers.PicassoWrapper
-import com.ricardojrsousa.movook.wrappers.loadBookCover
+import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
+import com.ricardojrsousa.movook.presentation.viewHolders.MoviePosterViewHolder
 import com.ricardojrsousa.movook.wrappers.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -33,13 +30,18 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         setupRecyclerView(view, moviesInTheatresAdapter)
         observeViewModel(moviesInTheatresAdapter)
 
+        startPostponedEnterTransition()
+
         setupView()
     }
 
     private fun setupView() {
         option_discover.setOnClickListener { showComingSoonToast() }
         option_upcoming.setOnClickListener { showComingSoonToast() }
-        option_most_popular.setOnClickListener { navigate(MainFragmentDirections.actionMainFragmentToPopularMoviesFragment()) }
+        option_top_rated.setOnClickListener {
+            showLoading()
+            navigate(MainFragmentDirections.actionMainFragmentToTopRatedMoviesFragment())
+        }
     }
 
     private fun showComingSoonToast() = Toast.makeText(requireContext(), R.string.coming_soon, Toast.LENGTH_LONG).show()
@@ -48,11 +50,6 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         view.movies_in_theatres_list.run {
             adapter = movieListAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-            postponeEnterTransition()
-            doOnPreDraw {
-                startPostponedEnterTransition()
-            }
 
             addOnScrollListener(object : PaginationScrollListener(layoutManager as LinearLayoutManager) {
                 override fun isLastPage(): Boolean {
@@ -72,7 +69,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     }
 
     private fun createMoviesInTheatresAdapter(): BindableViewListAdapter<Movie> {
-        val adapter = BindableViewListAdapter(MoviePosterView()) { view, movie ->
+        val adapter = BindableViewListAdapter(MoviePosterViewHolder()) { view, movie ->
             showLoading()
             if (movie != null) {
                 val action = MainFragmentDirections.actionMainFragmentToMovieDetailsFragment(movie.id)
@@ -91,8 +88,8 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     private fun observeViewModel(movieListAdapter: BindableViewListAdapter<Movie>) {
         viewModel.moviesInTheatres.observe(viewLifecycleOwner, { movieListAdapter.addItems(it) })
 
-        viewModel.popularMovieBackdrop.observe(viewLifecycleOwner, {
-            options_most_popular_background.loadImage(it)
+        viewModel.topRatedMovieBackdrop.observe(viewLifecycleOwner, {
+            options_top_rated_background.loadImage(it)
         })
     }
 

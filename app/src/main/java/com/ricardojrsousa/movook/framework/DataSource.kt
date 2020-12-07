@@ -54,13 +54,13 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return personDetails
     }
 
-    override suspend fun getPopularMovies(): MovieWrapper {
-        val movieWrapper = movieService.getPopularMovies()
+    override suspend fun getTopRatedMovies(page: Int): MovieWrapper {
+        val movieWrapper = movieService.getTopRatedMovies(page)
         movieWrapper.results.filterAdult().forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
         return movieWrapper
     }
 
-    override suspend fun getPopularMoviesBackdrops(): String {
+    override suspend fun getTopRatedMoviesBackdrops(): String {
         val index = Random.nextInt(1, 7)
         val backdropsReference = firebaseStorage.reference.child("popular_movies_backdrops").child("${index}.jpg")
         val result = backdropsReference.downloadUrl.await()
@@ -78,6 +78,8 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         //TODO: Save on db
         return book
     }
+
+
 
 
 }

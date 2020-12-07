@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@id/book_year"
                 tools:text="2010" />
 
-            <com.ricardojrsousa.movook.presentation.VoteView
+            <com.ricardojrsousa.movook.presentation.customviews.VoteView
                 android:id="@+id/book_rating"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

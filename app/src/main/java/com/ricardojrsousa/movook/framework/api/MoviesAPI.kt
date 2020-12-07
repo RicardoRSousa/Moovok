@@ -13,6 +13,10 @@ import retrofit2.http.Query
 private const val MOVIE = "movie"
 private const val PERSON = "person"
 
+const val POSTER_PATH_PREFIX = "https://image.tmdb.org/t/p/w400"
+const val BACKDROP_PATH_PREFIX = "https://image.tmdb.org/t/p/w1280"
+const val PROFILE_PATH_PREFIX = "https://image.tmdb.org/t/p/h632"
+
 interface MoviesAPI {
     @GET("${MOVIE}/now_playing")
     suspend fun getMoviesInTheatres(@Query("page") page: Int): MovieWrapper
@@ -20,8 +24,8 @@ interface MoviesAPI {
     @GET("${MOVIE}/{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id") movieId: String): MovieDetails
 
-    @GET("${MOVIE}/popular")
-    suspend fun getPopularMovies(): MovieWrapper
+    @GET("${MOVIE}/top_rated")
+    suspend fun getTopRatedMovies(@Query("page") page: Int): MovieWrapper
 
     @GET("${MOVIE}/{movie_id}/credits")
     suspend fun getMovieCast(@Path("movie_id") movieId: String): Cast
@@ -37,5 +41,4 @@ interface MoviesAPI {
 
     @GET("${PERSON}/{person_id}/movie_credits")
     suspend fun getPersonMovieCredits(@Path("person_id") personId: String): Credit
-
 }

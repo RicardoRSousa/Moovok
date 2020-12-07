@@ -101,10 +101,23 @@
                     android:textSize="@dimen/details_tagline_text_size"
                     tools:text="One Ring to rule them all" />
 
-                <com.ricardojrsousa.movook.presentation.VoteView
-                    android:id="@+id/movie_vote_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:src="@drawable/ic_tmdb_logo_short"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent" />
+
+                    <com.ricardojrsousa.movook.presentation.customviews.VoteView
+                        android:id="@+id/movie_vote_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

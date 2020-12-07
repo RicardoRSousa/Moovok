@@ -10,3 +10,5 @@ val Float.dp: Int
     get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
 fun List<Movie>.filterAdult(): List<Movie> = this.filter { !it.adult }
+
+fun List<Movie>.filterByVoteCount(minVoteCount: Int): List<Movie> = this.filter { it.voteCount > minVoteCount }

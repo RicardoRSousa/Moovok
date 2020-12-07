@@ -16,8 +16,8 @@
             app:popUpToInclusive="false" />
 
         <action
-            android:id="@+id/action_mainFragment_to_popularMoviesFragment"
-            app:destination="@id/popularMoviesFragment"
+            android:id="@+id/action_mainFragment_to_topRatedMoviesFragment"
+            app:destination="@id/topRatedMoviesFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="false" />
 
@@ -66,13 +66,23 @@
     </fragment>
 
     <fragment
-        android:id="@+id/popularMoviesFragment"
-        android:name="com.ricardojrsousa.movook.presentation.popularmovies.PopularMoviesFragment"
-        tools:layout="@layout/fragment_popular_movies">
+        android:id="@+id/topRatedMoviesFragment"
+        android:name="com.ricardojrsousa.movook.presentation.topratedmovies.TopRatedMoviesFragment"
+        tools:layout="@layout/fragment_top_rated_movies">
         <action
-            android:id="@+id/action_popularMoviesFragment_to_movieDetailsFragment"
+            android:id="@+id/action_topRatedMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.ricardojrsousa.movook.presentation.welcome.WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

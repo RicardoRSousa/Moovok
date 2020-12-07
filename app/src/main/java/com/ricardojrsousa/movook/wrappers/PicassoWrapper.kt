@@ -8,27 +8,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ricardojrsousa.movook.R
+import com.ricardojrsousa.movook.framework.api.BACKDROP_PATH_PREFIX
+import com.ricardojrsousa.movook.framework.api.POSTER_PATH_PREFIX
+import com.ricardojrsousa.movook.framework.api.PROFILE_PATH_PREFIX
 import com.ricardojrsousa.movook.utils.RoundedTransformation
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Picasso.LoadedFrom
 import com.squareup.picasso.Target
 import java.lang.Exception
-import kotlin.annotation.Target as Target1
-
 
 /**
  * Created by ricardosousa on 23/03/2020
  */
 object PicassoWrapper {
 
-    private const val posterPathPrefix = "https://image.tmdb.org/t/p/w500"
-    private const val backdropPathPrefix = "https://image.tmdb.org/t/p/w1280"
-    private const val profilePathPrefix = "https://image.tmdb.org/t/p/h632"
-
     fun loadMoviePoster(url: String?, view: ImageView, callback: Callback?) {
         Picasso.get()
-            .load(posterPathPrefix + url)
+            .load(POSTER_PATH_PREFIX + url)
             .placeholder(R.drawable.poster_placeholder)
             .transform(RoundedTransformation(20f))
             .into(view, callback)
@@ -36,7 +33,7 @@ object PicassoWrapper {
 
     fun loadMovieBackdrop(url: String?, view: ImageView, callback: Callback? = null) {
         Picasso.get()
-            .load(backdropPathPrefix + url)
+            .load(BACKDROP_PATH_PREFIX + url)
             .fit()
             .centerCrop()
             .into(view, callback)
@@ -70,7 +67,7 @@ object PicassoWrapper {
 
     fun loadCastProfileThumbnail(url: String?, view: ImageView, callback: Callback? = null) {
         Picasso.get()
-            .load(profilePathPrefix + url)
+            .load(PROFILE_PATH_PREFIX + url)
             .placeholder(R.drawable.person_placeholder)
             .fit()
             .transform(RoundedTransformation(10f))

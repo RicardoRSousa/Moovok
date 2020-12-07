@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    tools:background="@color/colorPrimary">
+
+    <com.wajahatkarim3.easyflipview.EasyFlipView
+        android:id="@+id/flip_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:autoFlipBack="false"
+        app:flipDuration="400"
+        app:flipEnabled="true"
+        app:flipFrom="right"
+        app:flipOnTouch="false"
+        app:flipType="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/view_movie_back" />
+
+        <include layout="@layout/view_movie_front" />
+
+    </com.wajahatkarim3.easyflipview.EasyFlipView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

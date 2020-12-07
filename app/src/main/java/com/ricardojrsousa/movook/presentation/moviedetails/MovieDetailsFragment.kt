@@ -1,38 +1,30 @@
 package com.ricardojrsousa.movook.presentation.moviedetails
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.webkit.WebViewClient
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.core.data.*
+import com.ricardojrsousa.movook.core.data.Book
+import com.ricardojrsousa.movook.core.data.Movie
+import com.ricardojrsousa.movook.core.data.MovieDetails
+import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.presentation.BaseFragment
-import com.ricardojrsousa.movook.presentation.adapters.BindableViewListAdapter
-import com.ricardojrsousa.movook.presentation.main.MainFragmentDirections
-import com.ricardojrsousa.movook.presentation.views.BookCoverView
-import com.ricardojrsousa.movook.presentation.views.CastPersonView
-import com.ricardojrsousa.movook.presentation.views.MoviePosterView
-import com.ricardojrsousa.movook.wrappers.loadBackdrop
+import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
+import com.ricardojrsousa.movook.presentation.viewHolders.BookCoverViewHolder
+import com.ricardojrsousa.movook.presentation.viewHolders.CastPersonViewHolder
+import com.ricardojrsousa.movook.presentation.viewHolders.MoviePosterViewHolder
 import com.ricardojrsousa.movook.wrappers.loadMovieBackdrop
 import com.ricardojrsousa.movook.wrappers.loadMoviePoster
 import com.squareup.picasso.Callback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_details.*
-import kotlinx.android.synthetic.main.fragment_movie_details.movie_description
-import kotlinx.android.synthetic.main.fragment_movie_details.movie_poster_image
-import kotlinx.android.synthetic.main.fragment_movie_details.movie_tagline
-import kotlinx.android.synthetic.main.fragment_movie_details.movie_title
-import kotlinx.android.synthetic.main.fragment_movie_details.movie_year
 import kotlinx.android.synthetic.main.fragment_movie_details.view.*
-import kotlinx.android.synthetic.main.fragment_movie_details.view.related_books_list
-import kotlinx.android.synthetic.main.fragment_movie_details.view.similar_movies_list
+
 
 @AndroidEntryPoint
 class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragment_movie_details) {
@@ -81,35 +73,35 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
     }
 
     private fun createSimilarMoviesAdapter(): BindableViewListAdapter<Movie> =
-        BindableViewListAdapter(MoviePosterView()) { view, movie ->
+        BindableViewListAdapter(MoviePosterViewHolder()) { view, movie ->
             showLoading()
             if (movie != null) {
                 val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(movie.id)
                 if (view != null) {
                     val extras = FragmentNavigatorExtras(view to movie.id)
-                    navController.navigate(action, extras)
+                    navigate(action, extras)
                 } else {
-                    navController.navigate(action)
+                    navigate(action)
                 }
             }
         }
 
     private fun createRelatedBooksAdapter(): BindableViewListAdapter<Book> =
-        BindableViewListAdapter(BookCoverView()) { view, book ->
+        BindableViewListAdapter(BookCoverViewHolder()) { view, book ->
             //if (view != null) {
             showLoading()
             val extras = FragmentNavigatorExtras(view as ImageView to book!!.id)
             val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToBookDetailsFragment(book.id)
-            navController.navigate(action, extras)
+            navigate(action, extras)
             //}
         }
 
     private fun createCastAdapter(): BindableViewListAdapter<Person> =
-        BindableViewListAdapter(CastPersonView()) { view, person ->
+        BindableViewListAdapter(CastPersonViewHolder()) { view, person ->
             showLoading()
             if (person != null) {
                 val action = MovieDetailsFragmentDirections.actionMovieDetailsFragmentToPersonDetailsFragment(person.id)
-                navController.navigate(action)
+                navigate(action)
             }
         }
 
@@ -118,19 +110,17 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
         similarMoviesAdapter: BindableViewListAdapter<Movie>, relatedBooksAdapter: BindableViewListAdapter<Book>,
         castListAdapter: BindableViewListAdapter<Person>
     ) {
-        viewModel.movieDetails.observe(viewLifecycleOwner, Observer {
+        viewModel.movieDetails.observe(viewLifecycleOwner, {
             setupView(it)
             castListAdapter.addItems(it.credits)
         })
 
-        viewModel.similarMovies.observe(viewLifecycleOwner,
-            Observer {
-                setupSimilarMoviesVisibility(!it.isEmpty())
-                similarMoviesAdapter.addItems(it)
-            })
+        viewModel.similarMovies.observe(viewLifecycleOwner, {
+            setupSimilarMoviesVisibility(!it.isEmpty())
+            similarMoviesAdapter.addItems(it)
+        })
 
-        viewModel.relatedBooks.observe(viewLifecycleOwner,
-            Observer { if (it != null) relatedBooksAdapter.addItems(it) })
+        viewModel.relatedBooks.observe(viewLifecycleOwner, { if (it != null) relatedBooksAdapter.addItems(it) })
     }
 
     private fun setupSimilarMoviesVisibility(hasSimilarMovies: Boolean) {

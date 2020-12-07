@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="@string/welcome_step_2_desc"
+        android:textColor="@color/alternative_white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_marginTop="140dp"
+        android:id="@+id/animationView_step2"
+        android:layout_width="@dimen/welcome_animation"
+        android:layout_height="@dimen/welcome_animation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/reading" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/close_welcome_btn"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:fb_defaultColor="@color/alternative_white"
+        app:fb_fontIconResource="&#xf008;"
+        app:fb_iconPosition="right"
+        app:fb_radius="2dp"
+        app:fb_text="Action!"
+        app:fb_textColor="@color/colorPrimary"
+        app:fb_textFont="@font/actor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/animationView_step2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

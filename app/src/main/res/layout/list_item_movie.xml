@@ -33,7 +33,7 @@
         tools:text="Lord of the rings" />
 
 
-    <com.ricardojrsousa.movook.presentation.VoteView
+    <com.ricardojrsousa.movook.presentation.customviews.VoteView
         android:id="@+id/credit_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
