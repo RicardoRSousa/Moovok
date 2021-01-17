@@ -36,7 +36,11 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     }
 
     private fun setupView() {
-        option_discover.setOnClickListener { showComingSoonToast() }
+        option_discover.setOnClickListener {
+            //showLoading()
+            //navigate(MainFragmentDirections.actionMainFragmentToDiscoverFragment())
+            showComingSoonToast()
+        }
         option_upcoming.setOnClickListener { showComingSoonToast() }
         option_top_rated.setOnClickListener {
             showLoading()

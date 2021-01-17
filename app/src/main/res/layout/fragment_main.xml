@@ -43,10 +43,10 @@
         app:layout_constraintTop_toBottomOf="@id/movies_in_theatres_label" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="22dp"
         android:id="@+id/option_top_rated"
         android:layout_width="0dp"
         android:layout_height="120dp"
+        android:layout_marginTop="22dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +100,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="@string/coming_soon_features"
+        android:textColor="@color/alternative_white"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/option_top_rated" />
+
     <LinearLayout
         android:id="@+id/more_movies_options"
         android:layout_width="match_parent"
@@ -112,10 +121,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/option_upcoming"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
             android:layout_margin="6dp"
-            android:layout_weight="1"
             app:cardBackgroundColor="@color/alternative_red"
             app:cardCornerRadius="6dp">
 
@@ -146,10 +154,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/option_discover"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
             android:layout_margin="6dp"
-            android:layout_weight="1"
             app:cardBackgroundColor="@color/alternative_red"
             app:cardCornerRadius="6dp">
 

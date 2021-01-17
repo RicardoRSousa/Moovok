@@ -1,5 +1,6 @@
 package com.ricardojrsousa.movook.core.repository
 
+import com.ricardojrsousa.movook.core.data.GenreWrapper
 import com.ricardojrsousa.movook.core.data.Person
 import com.ricardojrsousa.movook.core.data.MovieDetails
 import com.ricardojrsousa.movook.core.data.MovieWrapper
@@ -14,4 +15,5 @@ interface MoviesDataSource {
     suspend fun getPersonDetails(personId: String): Person
     suspend fun getTopRatedMovies(page: Int): MovieWrapper
     suspend fun getTopRatedMoviesBackdrops(): String
+    suspend fun getGenresList(): GenreWrapper
 }

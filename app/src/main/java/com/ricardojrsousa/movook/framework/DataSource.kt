@@ -67,6 +67,11 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return result.toString()
     }
 
+    override suspend fun getGenresList(): GenreWrapper {
+        val genreWrapper = movieService.getGenresList()
+        return genreWrapper
+    }
+
     override suspend fun searchBooksByTitle(query: String): List<Book> {
         val books = bookService.searchBooksByTitle(query)
         //TODO: Save on db

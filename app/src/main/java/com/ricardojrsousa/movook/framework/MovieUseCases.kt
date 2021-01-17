@@ -11,5 +11,6 @@ data class MovieUseCases(
     val getSimilarMovies: GetSimilarMovies,
     val getPersonDetails: GetPersonDetails,
     val getTopRatedMovies: GetTopRatedMovies,
-    val getTopRatedMoviesBackdrops: GetTopRatedMoviesBackdrops
+    val getTopRatedMoviesBackdrops: GetTopRatedMoviesBackdrops,
+    val getGenresList: GetGenresList,
 )

@@ -71,7 +71,7 @@ class BookDetailsFragment : BaseFragment<BookDetailsViewModel>(R.layout.fragment
     }
 
     private fun observeViewModel(view: View) {
-        viewModel.bookDetails.observe(viewLifecycleOwner, Observer {
+        viewModel.bookDetails.observe(viewLifecycleOwner, {
             setupView(view, it)
         })
     }

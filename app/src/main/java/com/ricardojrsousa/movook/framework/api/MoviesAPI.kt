@@ -41,4 +41,7 @@ interface MoviesAPI {
 
     @GET("${PERSON}/{person_id}/movie_credits")
     suspend fun getPersonMovieCredits(@Path("person_id") personId: String): Credit
+
+    @GET("genre/movie/list")
+    suspend fun getGenresList(): GenreWrapper
 }

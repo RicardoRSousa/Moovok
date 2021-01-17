@@ -10,4 +10,5 @@ class MoviesRepository(private val dataSource: MoviesDataSource) {
     suspend fun getPersonDetails(personId: String) = dataSource.getPersonDetails(personId)
     suspend fun getTopRatedMovies(page: Int) = dataSource.getTopRatedMovies(page)
     suspend fun getTopRatedMoviesBackdrops() = dataSource.getTopRatedMoviesBackdrops()
+    suspend fun getGenresList() = dataSource.getGenresList()
 }
