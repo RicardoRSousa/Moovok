@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#353d4a</color>
     <color name="colorPrimaryTransparent">#33353d4a</color>
-    <color name="colorPrimaryDark">#677D7B</color>
+   <!-- <color name="colorPrimaryDark">#677D7B</color> -->
+   <color name="colorPrimaryDark">#353d4a</color>
     <color name="colorAccent">#B9906A</color>
 
     <color name="palette_color_1">#353D4A</color>
@@ -22,6 +23,7 @@
     <color name="votes_red">#914045</color>
 
     <color name="backdrop_mask">#99353d4a</color>
+    <color name="movie_poster_mask">#CD353D4A</color>
     <color name="loadingBackground">#66353d4a</color>
 
 </resources>

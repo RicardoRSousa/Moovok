@@ -15,10 +15,10 @@ import com.ricardojrsousa.movook.R
 
 abstract class BaseFragment<T : BaseViewModel>(private val contentLayout: Int) : Fragment() {
 
-    private lateinit var rootView: FrameLayout
+    private var rootView: FrameLayout? = null
     abstract val viewModel: T
-    lateinit var navController: NavController
-    lateinit var loadingView: View
+    private lateinit var navController: NavController
+    private var loadingView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,12 @@ abstract class BaseFragment<T : BaseViewModel>(private val contentLayout: Int) :
         navController.navigate(action)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        rootView = null
+        loadingView = null
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_base, container, false) as FrameLayout
         loadingView = inflater.inflate(R.layout.fragment_loading, rootView, false)
@@ -45,16 +51,16 @@ abstract class BaseFragment<T : BaseViewModel>(private val contentLayout: Int) :
         postponeEnterTransition()
 
         val contentView = inflater.inflate(contentLayout, rootView, false)
-        rootView.addView(contentView)
+        rootView?.addView(contentView)
         return rootView
     }
 
     fun showLoading() {
         hideLoading()
-        rootView.addView(loadingView)
+        rootView?.addView(loadingView)
     }
 
     fun hideLoading() {
-        rootView.removeView(loadingView)
+        rootView?.removeView(loadingView)
     }
 }

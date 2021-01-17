@@ -43,17 +43,17 @@
         app:layout_constraintTop_toBottomOf="@id/movies_in_theatres_label" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="22dp"
-        android:id="@+id/option_most_popular"
+        android:id="@+id/option_top_rated"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="22dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movies_in_theatres_list">
 
         <ImageView
-            android:id="@+id/options_most_popular_background"
+            android:id="@+id/options_top_rated_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -92,13 +92,22 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="6dp"
                 android:gravity="center"
-                android:text="@string/most_popular_movies"
+                android:text="@string/top_rated_movies"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="@string/coming_soon_features"
+        android:textColor="@color/alternative_white"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/option_top_rated" />
 
     <LinearLayout
         android:id="@+id/more_movies_options"
@@ -108,14 +117,13 @@
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/option_most_popular">
+        app:layout_constraintTop_toBottomOf="@+id/option_top_rated">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/option_upcoming"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
             android:layout_margin="6dp"
-            android:layout_weight="1"
             app:cardBackgroundColor="@color/alternative_red"
             app:cardCornerRadius="6dp">
 
@@ -146,10 +154,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/option_discover"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
             android:layout_margin="6dp"
-            android:layout_weight="1"
             app:cardBackgroundColor="@color/alternative_red"
             app:cardCornerRadius="6dp">
 

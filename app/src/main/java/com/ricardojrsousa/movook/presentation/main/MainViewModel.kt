@@ -1,18 +1,14 @@
 package com.ricardojrsousa.movook.presentation.main
 
-import android.graphics.drawable.Drawable
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.google.firebase.crashlytics.internal.model.ImmutableList
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.presentation.BaseViewModel
-import com.ricardojrsousa.movook.utils.filterAdult
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class MainViewModel @ViewModelInject constructor(@Assisted private val savedStateHandle: SavedStateHandle, private val movieUseCases: MovieUseCases) : BaseViewModel() {
 
@@ -26,8 +22,8 @@ class MainViewModel @ViewModelInject constructor(@Assisted private val savedStat
     private val _loadedItems: MutableList<Movie> = mutableListOf()
     val loadedItems: List<Movie> = _loadedItems
 
-    private val _popularMovieBackdrop: MutableLiveData<String?> = MutableLiveData()
-    val popularMovieBackdrop: LiveData<String?> = _popularMovieBackdrop
+    private val _topRatedMovieBackdrop: MutableLiveData<String?> = MutableLiveData()
+    val topRatedMovieBackdrop: LiveData<String?> = _topRatedMovieBackdrop
 
     init {
         getMoviesInTheatres(nowPlayingMoviesCurrentPage)
@@ -58,8 +54,8 @@ class MainViewModel @ViewModelInject constructor(@Assisted private val savedStat
 
     private fun getRandomBackdrop() {
         coroutineScope.launch {
-            val image = movieUseCases.getPopularMoviesBackdrops.invoke()
-            _popularMovieBackdrop.postValue(image)
+            val image = movieUseCases.getTopRatedMoviesBackdrops.invoke()
+            _topRatedMovieBackdrop.postValue(image)
         }
     }
 }

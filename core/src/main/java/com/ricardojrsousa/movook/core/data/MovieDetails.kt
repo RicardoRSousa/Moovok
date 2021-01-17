@@ -39,7 +39,7 @@ data class MovieDetails(
     var credits: List<Person>,
     var keywords: List<MovieKeyword>
 ) : Identifiable {
-    fun getImdbUrl(): String = "https://www.imdb.com/title/{$imdbId}/"
+    fun getImdbUrl(): String = "https://www.imdb.com/title/$imdbId/"
 
     fun getGenres(): String? = genres?.map { it.name }?.joinToString(separator = " ")
 
