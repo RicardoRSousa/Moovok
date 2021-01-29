@@ -4,11 +4,15 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.ricardojrsousa.movook.R
+import com.ricardojrsousa.movook.utils.dp
 import kotlinx.android.synthetic.main.vote_custom_view.view.*
 
 class VoteView(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private var max: Int
+
+    private var progressWidth: Float = 0f
+    private var progressHeight: Float = 0f
 
     init {
         inflate(context, R.layout.vote_custom_view, this)
@@ -43,7 +47,7 @@ class VoteView(context: Context, attrs: AttributeSet?) : LinearLayout(context, a
 
         vote_label.text = "$vote/$max"
         vote_progress.progressColor = resources.getColor(color)
-        vote_progress.progress = vote.toFloat()
+        vote_progress.setProgress(vote.toFloat(), true)
     }
 
 }

@@ -46,7 +46,6 @@ class MoviePosterView(context: Context, attrs: AttributeSet?) : ConstraintLayout
 
         back_movie_name.text = movie?.title
 
-        back_movie_year.text = movie?.getReleaseYear()
         back_movie_rating.setVote(movie?.voteAverage)
 
         flip_view.setOnClickListener {

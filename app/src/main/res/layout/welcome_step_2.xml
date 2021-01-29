@@ -43,7 +43,7 @@
         app:fb_radius="2dp"
         app:fb_text="Action!"
         app:fb_textColor="@color/colorPrimary"
-        app:fb_textFont="@font/actor"
+        app:fb_textFont="@font/cabin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -7,16 +7,18 @@
 
     <com.github.guilhe.views.CircularProgressView
         android:id="@+id/vote_progress"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         app:progressBarRounded="true"
-        app:progressBarThickness="3dp"
+        app:progressBarThickness="6dp"
         app:shadow="false" />
 
     <TextView
         android:id="@+id/vote_label"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fontFamily="@font/cabin"
         android:gravity="center_vertical"
         android:textStyle="bold" />
+
 </LinearLayout>

@@ -4,6 +4,7 @@ import com.ricardojrsousa.movook.core.data.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 
 /**
@@ -44,4 +45,7 @@ interface MoviesAPI {
 
     @GET("genre/movie/list")
     suspend fun getGenresList(): GenreWrapper
+
+    @GET("discover/movie")
+    suspend fun getDiscoverMovies(@QueryMap discoverMoviesQueryMap: Map<String, String?>): MovieWrapper
 }

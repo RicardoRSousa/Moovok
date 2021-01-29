@@ -8,11 +8,12 @@ import androidx.lifecycle.SavedStateHandle
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.presentation.BaseViewModel
+import com.ricardojrsousa.movook.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(@Assisted private val savedStateHandle: SavedStateHandle, private val movieUseCases: MovieUseCases) : BaseViewModel() {
 
-    private val _moviesInTheatres: MutableLiveData<List<Movie>> = MutableLiveData()
+    private val _moviesInTheatres: SingleLiveEvent<List<Movie>> = SingleLiveEvent()
     val moviesInTheatres: LiveData<List<Movie>> = _moviesInTheatres
 
     private var nowPlayingMoviesCurrentPage = 1

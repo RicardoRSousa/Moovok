@@ -10,7 +10,7 @@ import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
-import com.ricardojrsousa.movook.presentation.main.PaginationScrollListener
+import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import com.ricardojrsousa.movook.presentation.viewHolders.MoviePosterViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_rated_movies.view.*

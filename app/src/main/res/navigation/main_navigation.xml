@@ -78,6 +78,7 @@
             app:destination="@id/movieDetailsFragment" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_welcome"
         android:id="@+id/welcomeFragment"
         android:name="com.ricardojrsousa.movook.presentation.welcome.WelcomeFragment">
         <action
@@ -89,7 +90,26 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_discover"
         android:id="@+id/discoverFragment"
-        android:name="com.ricardojrsousa.movook.presentation.discover.DiscoverFragment"/>
+        android:name="com.ricardojrsousa.movook.presentation.discover.DiscoverFragment">
+        <action
+            android:id="@+id/action_discoverFragment_to_discoverSuggestionsFragment"
+            app:destination="@id/discoverSuggestionsFragment"
+            app:popUpTo="@id/discoverFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_discover_suggestions"
+        android:id="@+id/discoverSuggestionsFragment"
+        android:name="com.ricardojrsousa.movook.presentation.discover.suggestions.DiscoverSuggestionsFragment">
+        <action
+            android:id="@+id/action_discoverSuggestionsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:popUpTo="@id/discoverSuggestionsFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+
 
 </navigation>

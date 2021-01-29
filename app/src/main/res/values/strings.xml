@@ -19,62 +19,21 @@
     <string name="welcome_step_2_desc">... find out in which book was the movie based on and, who knows, give it a read ;)</string>
     <string name="welcome_step_1_desc">Welcome to Movook!\n\nSee the upcoming, top rated movies and discover your next favorite! Check its details and...</string>
 
-    <string name="action_on">Don\'t look at the explosions like the cool guys</string>
-    <string name="action_off"></string>
+    <string name="year_range_from">from %d</string>
+    <string name="year_range_to">to %d</string>
+    <string name="runtime_range_from">from %d min</string>
+    <string name="runtime_range_to">to %d min</string>
 
-    <string name="animation_on"></string>
-    <string name="animation_off"></string>
+    <string name="min_vote_avg_from">from %.1f</string>
+    <string name="min_vote_avg_to">to 10</string>
 
-    <string name="crime_on">Are you the good or the bad cop?</string>
-    <string name="crime_off"></string>
+    <string name="select_the_year_range">Select the year range:</string>
+    <string name="select_the_runtime_range">Select the runtime range:</string>
 
-    <string name="drama_on">A little dramatic, huh?</string>
-    <string name="drama_off"></string>
+    <string name="suggestions_count">We fave found %d suggestions. Hope you like 😉</string>
+    <string name="suggestions_empty">Unfortunately we haven\'t found any movie that matches the criteria. Try change your search.</string>
+    <string name="select_the_genres">Select the genres:</string>
+    <string name="select_the_min_vote_avg">Select the minimum vote average:</string>
 
-    <string name="fantasy_on">Who doesn\'t love some fairies?</string>
-    <string name="fantasy_off"></string>
-
-    <string name="horror_on">Don\'t blame me if you don\'t sleep tonight.</string>
-    <string name="horror_off">Yep, no jumpscares.</string>
-
-    <string name="mystery_on">Are you sure???</string>
-    <string name="mystery_off">Stop the riddles...</string>
-
-    <string name="scifi_on">In space no one can hear you scream.</string>
-    <string name="scifi_off">Let\'s have some foot on earth</string>
-
-    <string name="thriller_on">Aww! I love this Michael Jackson song!</string>
-    <string name="thriller_off">You don\'t?</string>
-
-    <string name="western_on">I\'m the good, my friend is the bad... you must be the ugly...</string>
-    <string name="western_off">No spaghetti then...</string>
-
-    <string name="adventure_on">I used to be an adventurer like you...</string>
-    <string name="adventure_off">...then I took an arrow in the knee.</string>
-
-    <string name="comedy_on">Knock knock!</string>
-    <string name="comedy_off">I hate these jokes...</string>
-
-    <string name="documentary_on">Look at you, Mr. Smart Doc Guy!</string>
-    <string name="documentary_off">Ok, something fictional then</string>
-
-    <string name="family_on">Bring the popcorn!</string>
-    <string name="family_off">The kids are asleep?</string>
-
-    <string name="history_on">Learn with the past</string>
-    <string name="history_off">The future is now!</string>
-
-    <string name="music_on">I could sing to you if you wish...</string>
-    <string name="music_off">... better not</string>
-
-    <string name="romance_on">Are you heartbroken?</string>
-    <string name="romance_off">Yep, you\'re heartbroken...</string>
-
-    <string name="tvmovie_on"></string>
-    <string name="tvmovie_off"></string>
-
-    <string name="war_on">Sir, yes, Sir!</string>
-    <string name="war_off">Peace time</string>
-    <string name="coming_soon_features">Coming soon features...</string>
 
 </resources>
