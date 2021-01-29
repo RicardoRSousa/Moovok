@@ -2,7 +2,6 @@
 <resources>
     <color name="colorPrimary">#353d4a</color>
     <color name="colorPrimaryTransparent">#33353d4a</color>
-   <!-- <color name="colorPrimaryDark">#677D7B</color> -->
    <color name="colorPrimaryDark">#353d4a</color>
     <color name="colorAccent">#B9906A</color>
 
@@ -17,10 +16,10 @@
     <color name="alternative_blue">#4F7994</color>
     <color name="alternative_brown">#CCB9B8</color>
 
-    <color name="votes_green">#A4CB79</color>
-    <color name="votes_yellow">#C5B666</color>
-    <color name="votes_orange">#B56E46</color>
-    <color name="votes_red">#914045</color>
+    <color name="votes_green">#75AF7A</color>
+    <color name="votes_yellow">#BAA164</color>
+    <color name="votes_orange">#E9A35F</color>
+    <color name="votes_red">#AF3A2E</color>
 
     <color name="backdrop_mask">#99353d4a</color>
     <color name="movie_poster_mask">#CD353D4A</color>

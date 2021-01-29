@@ -16,7 +16,6 @@ class CastPersonViewHolder : BindableViewHolder<Person> {
     override fun bind(person: Person?, position: Int?, clickListener: ((view: ImageView?, t: Person?) -> Unit)?) {
         with(itemView.cast_image) {
             loadCastProfileThumbnail(person?.profilePath)
-            //transitionName = cast.id.toString()
         }
         itemView.cast_name.text = person?.name
         itemView.cast_character.text = person?.character

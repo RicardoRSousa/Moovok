@@ -2,15 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/year_range_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/select_the_year_range"
+        android:textColor="@color/alternative_white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.jaygoo.widget.RangeSeekBar
         android:id="@+id/year_range_seek_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/year_range_label"
         app:rsb_indicator_background_color="@color/alternative_white"
         app:rsb_indicator_padding_bottom="10dp"
         app:rsb_indicator_padding_left="10dp"
@@ -19,17 +32,164 @@
         app:rsb_indicator_radius="10dp"
         app:rsb_indicator_show_mode="showWhenTouch"
         app:rsb_indicator_text_color="@color/colorPrimary"
-        app:rsb_max="2020"
-        app:rsb_min="1900"
-        app:rsb_min_interval="1"
         app:rsb_mode="range"
         app:rsb_progress_color="@color/votes_green"
         app:rsb_progress_default_color="@color/alternative_white"
         app:rsb_progress_radius="4dp"
-        app:rsb_steps="110"
         app:rsb_thumb_height="16dp"
         app:rsb_thumb_scale_ratio="1.4"
         app:rsb_thumb_width="16dp"
         app:rsb_tick_mark_mode="number" />
+
+    <TextView
+        android:id="@+id/year_range_from_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/year_range_from"
+        android:textColor="@color/alternative_white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/year_range_seek_bar" />
+
+    <TextView
+        android:id="@+id/year_range_to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/year_range_to"
+        android:textColor="@color/alternative_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/year_range_seek_bar" />
+
+    <TextView
+        android:id="@+id/runtime_range_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/cabin"
+        android:text="@string/select_the_runtime_range"
+        android:textColor="@color/alternative_white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/year_range_from_label" />
+
+    <com.jaygoo.widget.RangeSeekBar
+        android:id="@+id/runtime_range_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/runtime_range_label"
+        app:rsb_indicator_background_color="@color/alternative_white"
+        app:rsb_indicator_padding_bottom="10dp"
+        app:rsb_indicator_padding_left="10dp"
+        app:rsb_indicator_padding_right="10dp"
+        app:rsb_indicator_padding_top="10dp"
+        app:rsb_indicator_radius="10dp"
+        app:rsb_indicator_show_mode="showWhenTouch"
+        app:rsb_indicator_text_color="@color/colorPrimary"
+        app:rsb_mode="range"
+        app:rsb_progress_color="@color/votes_green"
+        app:rsb_progress_default_color="@color/alternative_white"
+        app:rsb_progress_radius="4dp"
+        app:rsb_thumb_height="16dp"
+        app:rsb_thumb_scale_ratio="1.4"
+        app:rsb_thumb_width="16dp"
+        app:rsb_tick_mark_mode="number" />
+
+    <TextView
+        android:id="@+id/runtime_range_from_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/year_range_from"
+        android:textColor="@color/alternative_white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/runtime_range_seek_bar" />
+
+    <TextView
+        android:id="@+id/runtime_range_to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/year_range_to"
+        android:textColor="@color/alternative_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/runtime_range_seek_bar" />
+
+    <TextView
+        android:id="@+id/min_vote_avg_range_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/cabin"
+        android:text="@string/select_the_min_vote_avg"
+        android:textColor="@color/alternative_white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/runtime_range_to_label" />
+
+    <com.jaygoo.widget.RangeSeekBar
+        android:id="@+id/min_vote_agv_seekbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/min_vote_avg_range_label"
+        app:rsb_indicator_background_color="@color/alternative_white"
+        app:rsb_indicator_padding_bottom="10dp"
+        app:rsb_min="0"
+        app:rsb_max="10"
+        app:rsb_indicator_padding_left="10dp"
+        app:rsb_indicator_padding_right="10dp"
+        app:rsb_indicator_padding_top="10dp"
+        app:rsb_indicator_radius="10dp"
+        app:rsb_indicator_show_mode="showWhenTouch"
+        app:rsb_indicator_text_color="@color/colorPrimary"
+        app:rsb_mode="single"
+        app:rsb_progress_color="@color/votes_green"
+        app:rsb_progress_default_color="@color/alternative_white"
+        app:rsb_progress_radius="4dp"
+        app:rsb_thumb_height="16dp"
+        app:rsb_thumb_scale_ratio="1.4"
+        app:rsb_thumb_width="16dp"
+        app:rsb_tick_mark_mode="number" />
+
+    <TextView
+        android:id="@+id/min_vote_avg_from_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/min_vote_avg_from"
+        android:textColor="@color/alternative_white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/min_vote_agv_seekbar" />
+
+    <TextView
+        android:id="@+id/min_vote_avg_to_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="@string/min_vote_avg_to"
+        android:textColor="@color/alternative_white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/min_vote_agv_seekbar" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:padding="12dp"
+        android:id="@+id/discover_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:fb_defaultColor="@color/alternative_white"
+        app:fb_fontIconResource="&#xf00c;"
+        app:fb_radius="4dp"
+        app:fb_text="Discover Movies"
+        app:fb_textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

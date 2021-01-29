@@ -12,6 +12,7 @@ import com.ricardojrsousa.movook.framework.db.DatabaseService
 import com.ricardojrsousa.movook.framework.db.MovieEntity
 import com.ricardojrsousa.movook.utils.filterAdult
 import kotlinx.coroutines.tasks.await
+import kotlin.collections.HashMap
 import kotlin.random.Random
 
 /**
@@ -72,6 +73,22 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return genreWrapper
     }
 
+    override suspend fun getDiscoverMovies(includedGenres: List<String>, fromYear: Int, toYear: Int, minRuntime: Int, maxRuntime: Int, minVoteAvg: Double, page: Int): MovieWrapper {
+        val map: HashMap<String, String?> = HashMap()
+        map.put("with_genres", includedGenres.joinToString(","))
+        map.put("primary_release_date.gte", "${fromYear}-01-01")
+        map.put("primary_release_date.lte", "${toYear}-12-31")
+        map.put("with_runtime.gte", minRuntime.toString())
+        map.put("with_runtime.lte", maxRuntime.toString())
+        map.put("vote_average.gte", minVoteAvg.toString())
+        map.put("vote_count.gte", "1000")
+        map.put("page", page.toString())
+
+        val movieWrapper = movieService.getDiscoverMovies(map)
+        movieWrapper.results.filterAdult().forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }
+        return movieWrapper
+    }
+
     override suspend fun searchBooksByTitle(query: String): List<Book> {
         val books = bookService.searchBooksByTitle(query)
         //TODO: Save on db
@@ -83,8 +100,6 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         //TODO: Save on db
         return book
     }
-
-
 
 
 }

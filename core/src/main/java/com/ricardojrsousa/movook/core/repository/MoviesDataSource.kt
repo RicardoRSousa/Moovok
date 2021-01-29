@@ -16,4 +16,5 @@ interface MoviesDataSource {
     suspend fun getTopRatedMovies(page: Int): MovieWrapper
     suspend fun getTopRatedMoviesBackdrops(): String
     suspend fun getGenresList(): GenreWrapper
+    suspend fun getDiscoverMovies(includedGenres: List<String>, fromYear: Int, toYear: Int, minRuntime: Int, maxRuntime: Int, minVoteAvg: Double, page: Int): MovieWrapper
 }

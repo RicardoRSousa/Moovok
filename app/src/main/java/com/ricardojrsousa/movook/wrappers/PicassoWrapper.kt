@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.util.Log
+import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,11 +24,11 @@ import java.lang.Exception
  */
 object PicassoWrapper {
 
-    fun loadMoviePoster(url: String?, view: ImageView, callback: Callback?) {
+    fun loadMoviePoster(url: String?, view: ImageView, callback: Callback?, cornerRadius: Float? = 20f) {
         Picasso.get()
             .load(POSTER_PATH_PREFIX + url)
             .placeholder(R.drawable.poster_placeholder)
-            .transform(RoundedTransformation(20f))
+            .transform(RoundedTransformation(cornerRadius))
             .into(view, callback)
     }
 
@@ -84,8 +85,8 @@ object PicassoWrapper {
     }
 }
 
-fun ImageView.loadMoviePoster(url: String?, callback: Callback? = null) {
-    PicassoWrapper.loadMoviePoster(url, this, callback)
+fun ImageView.loadMoviePoster(url: String?, callback: Callback? = null, cornerRadius: Float? = 20f) {
+    PicassoWrapper.loadMoviePoster(url, this, callback, cornerRadius)
 }
 
 fun ImageView.loadMovieBackdrop(url: String?, callback: Callback? = null) {

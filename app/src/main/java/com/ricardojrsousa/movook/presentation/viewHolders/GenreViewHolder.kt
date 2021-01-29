@@ -4,17 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Genre
-import com.ricardojrsousa.movook.utils.getStringResourceByName
-import it.beppi.tristatetogglebutton_library.TriStateToggleButton
-import it.beppi.tristatetogglebutton_library.TriStateToggleButton.ToggleStatus
 import kotlinx.android.synthetic.main.list_item_genre.view.*
 
 /**
  * Created by Ricardo Sousa on 07/12/2020
  */
-class GenreViewHolder : BindableViewHolder<Genre> {
+class GenreViewHolder(
+    private val includedGenres: List<String>,
+    private val callback: (genre: Genre, status: Boolean) -> Unit
+) : BindableViewHolder<Genre> {
 
     override lateinit var itemView: View
 
@@ -23,17 +24,20 @@ class GenreViewHolder : BindableViewHolder<Genre> {
         return this
     }
 
-    override fun bind(t: Genre?, position: Int?, clickListener: ((view: ImageView?, t: Genre?) -> Unit)?) {
+    override fun bind(genre: Genre?, position: Int?, clickListener: ((view: ImageView?, t: Genre?) -> Unit)?) {
         with(itemView) {
-            genre_name.text = t?.name
-            genre_switch.tag = t?.name
 
-            genre_switch.setOnToggleChanged { toggleStatus, booleanToggleStatus, toggleIntValue ->
-                genre_message.text = when (toggleStatus) {
-                    ToggleStatus.off -> context.getStringResourceByName("${t?.name?.toLowerCase()}_off")
-                    ToggleStatus.on -> context.getStringResourceByName("${t?.name?.toLowerCase()}_on")
-                    ToggleStatus.mid -> ""
+            checkable_chip_view.apply {
+                text = genre?.name!!
+                isChecked = includedGenres.contains(genre.id)
+                onCheckedChangeListener = { view, isChecked ->
+                    callback.invoke(genre, isChecked)
                 }
+            }
+
+            val lp: ViewGroup.LayoutParams = checkable_chip_view.layoutParams
+            if (lp is FlexboxLayoutManager.LayoutParams) {
+                lp.flexGrow = 1.0f
             }
         }
     }

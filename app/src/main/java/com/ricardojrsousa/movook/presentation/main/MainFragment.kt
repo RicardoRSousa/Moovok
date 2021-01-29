@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
 import com.ricardojrsousa.movook.presentation.viewHolders.MoviePosterViewHolder
+import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import com.ricardojrsousa.movook.wrappers.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -37,9 +36,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
     private fun setupView() {
         option_discover.setOnClickListener {
-            //showLoading()
-            //navigate(MainFragmentDirections.actionMainFragmentToDiscoverFragment())
-            showComingSoonToast()
+            navigate(MainFragmentDirections.actionMainFragmentToDiscoverFragment())
         }
         option_upcoming.setOnClickListener { showComingSoonToast() }
         option_top_rated.setOnClickListener {

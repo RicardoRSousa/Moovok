@@ -2,16 +2,16 @@ package com.ricardojrsousa.movook.presentation.discover
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Genre
 import com.ricardojrsousa.movook.presentation.BaseFragment
-import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
-import com.ricardojrsousa.movook.presentation.viewHolders.GenreViewHolder
+import com.ricardojrsousa.movook.presentation.discover.wizard.DiscoverFragmentStep1
+import com.ricardojrsousa.movook.presentation.discover.wizard.DiscoverFragmentStep2
+import com.ricardojrsousa.movook.presentation.discover.wizard.DiscoverFragmentStep3
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.discover_fragment_2.view.*
-import kotlinx.android.synthetic.main.discover_fragment_3.view.*
+import kotlinx.android.synthetic.main.fragment_discover.*
 import kotlinx.android.synthetic.main.fragment_discover.view.*
 
 /**
@@ -21,12 +21,12 @@ import kotlinx.android.synthetic.main.fragment_discover.view.*
 @AndroidEntryPoint
 class DiscoverFragment : BaseFragment<DiscoverViewModel>(R.layout.fragment_discover) {
 
-    override val viewModel: DiscoverViewModel by viewModels()
-
-    var currentPage = 1
+    private var tabMediator: TabLayoutMediator? = null
+    override lateinit var viewModel: DiscoverViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(requireParentFragment(), defaultViewModelProviderFactory).get(DiscoverViewModel::class.java)
         viewModel.init()
     }
 
@@ -37,29 +37,13 @@ class DiscoverFragment : BaseFragment<DiscoverViewModel>(R.layout.fragment_disco
 
     private fun setupView(view: View, genresList: List<Genre>) {
         with(view) {
+            val pages = listOf(DiscoverFragmentStep1(), DiscoverFragmentStep2(genresList), DiscoverFragmentStep3())
 
-            discover_coordinator.addPage(R.layout.discover_fragment_1, R.layout.discover_fragment_2, R.layout.discover_fragment_3)
-            discover_coordinator.setScrollingEnabled(false)
+            view_pager.adapter = DiscoverFragmentPagerAdapter(this@DiscoverFragment, pages)
+            tabMediator = TabLayoutMediator(tab_dots, view_pager) { _, _ -> }
+            tabMediator!!.attach()
 
-            genres_list.layoutManager = object : GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false) {
-                override fun canScrollVertically(): Boolean {
-                    return false
-                }
-            }
-            genres_list.adapter = createGenresListAdapter(genresList)
-
-            year_range_seek_bar.setIndicatorTextDecimalFormat("0")
-
-            next.setOnClickListener {
-                discover_coordinator.setCurrentPage(currentPage++, true)
-            }
         }
-    }
-
-    private fun createGenresListAdapter(genresList: List<Genre>): BindableViewListAdapter<Genre> {
-        val adapter = BindableViewListAdapter(GenreViewHolder())
-        adapter.addItems(genresList)
-        return adapter
     }
 
     private fun observeViewModel(view: View) {
@@ -67,6 +51,16 @@ class DiscoverFragment : BaseFragment<DiscoverViewModel>(R.layout.fragment_disco
             startPostponedEnterTransition()
             setupView(view, it)
         })
+
+        viewModel.wizardConclusion.observe(viewLifecycleOwner, {
+            navigate(DiscoverFragmentDirections.actionDiscoverFragmentToDiscoverSuggestionsFragment())
+        })
+    }
+
+    override fun onDestroyView() {
+        view_pager.adapter = null
+        tabMediator?.detach()
+        tabMediator = null
+        super.onDestroyView()
     }
 }
-
