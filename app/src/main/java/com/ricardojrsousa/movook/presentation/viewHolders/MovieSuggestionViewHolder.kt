@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
+import com.ricardojrsousa.movook.wrappers.loadBigMoviePoster
 import com.ricardojrsousa.movook.wrappers.loadMoviePoster
 import kotlinx.android.synthetic.main.list_item_movie_suggestion.view.*
 
@@ -21,9 +22,9 @@ class MovieSuggestionViewHolder : BindableViewHolder<Movie> {
         return this
     }
 
-    override fun bind(movie: Movie?, position: Int?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
+    override fun bind(movie: Movie?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
         with(itemView.movie_suggestion_cover) {
-            loadMoviePoster(movie?.posterPath, cornerRadius = 10f)
+            loadBigMoviePoster(movie?.posterPath, cornerRadius = 10f)
             transitionName = movie?.id
         }
 

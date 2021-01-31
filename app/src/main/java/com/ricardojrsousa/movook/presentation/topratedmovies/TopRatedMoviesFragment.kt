@@ -6,12 +6,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
 import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import com.ricardojrsousa.movook.presentation.viewHolders.MoviePosterViewHolder
+import com.ricardojrsousa.movook.presentation.viewHolders.TopRatedMovieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_rated_movies.view.*
 
@@ -43,7 +45,7 @@ class TopRatedMoviesFragment : BaseFragment<TopRatedMoviesViewModel>(R.layout.fr
     private fun setupRecyclerView(view: View, topRatedMoviesAdapter: BindableViewListAdapter<Movie>) {
         view.top_rated_movies_recycler_view.run {
             adapter = topRatedMoviesAdapter
-            layoutManager = GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
+            layoutManager =  LinearLayoutManager(requireContext(),  VERTICAL, false)
 
             addOnScrollListener(object : PaginationScrollListener(layoutManager as LinearLayoutManager) {
                 override fun isLastPage(): Boolean {
@@ -62,7 +64,7 @@ class TopRatedMoviesFragment : BaseFragment<TopRatedMoviesViewModel>(R.layout.fr
     }
 
     private fun createtopRatedMoviesAdapter(): BindableViewListAdapter<Movie> {
-        val adapter = BindableViewListAdapter(MoviePosterViewHolder(160, 110)) { view, movie ->
+        val adapter = BindableViewListAdapter(TopRatedMovieViewHolder()) { view, movie ->
             showLoading()
             if (movie != null) {
                 val action = TopRatedMoviesFragmentDirections.actionTopRatedMoviesFragmentToMovieDetailsFragment(movie.id)

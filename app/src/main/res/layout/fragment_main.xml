@@ -93,7 +93,17 @@
                 android:layout_marginTop="6dp"
                 android:gravity="center"
                 android:text="@string/top_rated_movies"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/top_rated_movies_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -110,7 +120,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/option_top_rated">
 
-        <androidx.cardview.widget.CardView
+        <!-- <androidx.cardview.widget.CardView
             android:id="@+id/option_upcoming"
             android:layout_width="120dp"
             android:layout_height="160dp"
@@ -141,9 +151,9 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView> -->
 
-        <androidx.cardview.widget.CardView
+        <!-- <androidx.cardview.widget.CardView
             android:id="@+id/option_discover"
             android:layout_width="120dp"
             android:layout_height="160dp"
@@ -174,7 +184,22 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView> -->
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/option_discover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            app:fb_defaultColor="@color/alternative_white"
+            app:fb_fontIconResource="&#xf14e;"
+            app:fb_radius="4dp"
+            app:fb_text="Discover Movies"
+            app:fb_textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 

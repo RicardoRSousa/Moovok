@@ -15,6 +15,7 @@ private const val MOVIE = "movie"
 private const val PERSON = "person"
 
 const val POSTER_PATH_PREFIX = "https://image.tmdb.org/t/p/w400"
+const val BIG_POSTER_PATH_PREFIX = "https://image.tmdb.org/t/p/w780"
 const val BACKDROP_PATH_PREFIX = "https://image.tmdb.org/t/p/w1280"
 const val PROFILE_PATH_PREFIX = "https://image.tmdb.org/t/p/h632"
 

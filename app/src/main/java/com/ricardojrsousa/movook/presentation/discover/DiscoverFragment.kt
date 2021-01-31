@@ -48,11 +48,12 @@ class DiscoverFragment : BaseFragment<DiscoverViewModel>(R.layout.fragment_disco
 
     private fun observeViewModel(view: View) {
         viewModel.genres.observe(viewLifecycleOwner, {
-            startPostponedEnterTransition()
             setupView(view, it)
+            startPostponedEnterTransition()
         })
 
         viewModel.wizardConclusion.observe(viewLifecycleOwner, {
+            showLoading()
             navigate(DiscoverFragmentDirections.actionDiscoverFragmentToDiscoverSuggestionsFragment())
         })
     }

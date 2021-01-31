@@ -6,40 +6,15 @@
     android:layout_marginTop="@dimen/top_bar_height"
     android:background="@color/colorPrimary">
 
-    <TextView
-        android:id="@+id/top_rated_movies_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:gravity="center"
-        android:text="@string/top_rated_movies_title"
-        android:textColor="@color/alternative_white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/top_rated_movies_subtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:gravity="center"
-        android:text="@string/top_rated_movies_subtitle"
-        android:textColor="@color/alternative_white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_rated_movies_title" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/top_rated_movies_recycler_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_rated_movies_subtitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.framework.api.BACKDROP_PATH_PREFIX
+import com.ricardojrsousa.movook.framework.api.BIG_POSTER_PATH_PREFIX
 import com.ricardojrsousa.movook.framework.api.POSTER_PATH_PREFIX
 import com.ricardojrsousa.movook.framework.api.PROFILE_PATH_PREFIX
 import com.ricardojrsousa.movook.utils.RoundedTransformation
@@ -32,9 +33,18 @@ object PicassoWrapper {
             .into(view, callback)
     }
 
+    fun loadBigMoviePoster(url: String?, view: ImageView, callback: Callback?, cornerRadius: Float? = 20f) {
+        Picasso.get()
+            .load(BIG_POSTER_PATH_PREFIX + url)
+            .placeholder(R.drawable.poster_placeholder)
+            .transform(RoundedTransformation(cornerRadius))
+            .into(view, callback)
+    }
+
     fun loadMovieBackdrop(url: String?, view: ImageView, callback: Callback? = null) {
         Picasso.get()
             .load(BACKDROP_PATH_PREFIX + url)
+            .placeholder(R.drawable.backdrop_placeholder)
             .fit()
             .centerCrop()
             .into(view, callback)
@@ -87,6 +97,10 @@ object PicassoWrapper {
 
 fun ImageView.loadMoviePoster(url: String?, callback: Callback? = null, cornerRadius: Float? = 20f) {
     PicassoWrapper.loadMoviePoster(url, this, callback, cornerRadius)
+}
+
+fun ImageView.loadBigMoviePoster(url: String?, callback: Callback? = null, cornerRadius: Float? = 20f) {
+    PicassoWrapper.loadBigMoviePoster(url, this, callback, cornerRadius)
 }
 
 fun ImageView.loadMovieBackdrop(url: String?, callback: Callback? = null) {
