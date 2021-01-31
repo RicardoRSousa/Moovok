@@ -32,6 +32,8 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main), Lifecy
         setupRecyclerView(view, moviesInTheatresAdapter)
         observeViewModel(moviesInTheatresAdapter)
 
+        startPostponedEnterTransition()
+
         setupView()
 
         viewLifecycleOwner.lifecycle.addObserver(this)
@@ -102,7 +104,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main), Lifecy
 
     private fun observeViewModel(movieListAdapter: BindableViewListAdapter<Movie>) {
         viewModel.moviesInTheatres.observe(viewLifecycleOwner, {
-            startPostponedEnterTransition()
+            hideLoading()
             movieListAdapter.addItems(it)
         })
 
