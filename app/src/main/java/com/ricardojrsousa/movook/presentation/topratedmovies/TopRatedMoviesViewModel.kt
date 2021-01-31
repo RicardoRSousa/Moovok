@@ -8,6 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.presentation.BaseViewModel
+import com.ricardojrsousa.movook.utils.SingleLiveEvent
 import com.ricardojrsousa.movook.utils.filterAdult
 import com.ricardojrsousa.movook.utils.filterByVoteCount
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class TopRatedMoviesViewModel @ViewModelInject constructor(
     private val _loadedItems: MutableList<Movie> = mutableListOf()
     val loadedItems: List<Movie> = _loadedItems
 
-    private val _topRatedMovies: MutableLiveData<List<Movie>> = MutableLiveData()
+    private val _topRatedMovies: SingleLiveEvent<List<Movie>> = SingleLiveEvent()
     val topRatedMovies: LiveData<List<Movie>> = _topRatedMovies
 
     fun init() {

@@ -15,6 +15,8 @@ import com.ricardojrsousa.movook.core.data.Movie
 data class MovieEntity(
     @ColumnInfo(name = "poster_path")
     val posterPath: String?,
+    @ColumnInfo(name = "backdrop_path")
+    val backdropPath: String?,
     val overview: String,
     @ColumnInfo(name = "release_date")
     val releaseDate: String?,
@@ -34,13 +36,14 @@ data class MovieEntity(
 ) {
     companion object {
         fun fromMovie(movie: Movie) = MovieEntity(
-            movie.posterPath, movie.overview, movie.releaseDate, movie.genreIds, movie.id,
+            movie.posterPath, movie.backdropPath, movie.overview, movie.releaseDate, movie.genreIds, movie.id,
             movie.originalTitle, movie.title, movie.popularity, movie.voteAverage, movie.voteCount, movie.adult
         )
     }
 
     fun toMovie() = Movie(
         posterPath,
+        backdropPath,
         overview,
         releaseDate,
         genreIds,

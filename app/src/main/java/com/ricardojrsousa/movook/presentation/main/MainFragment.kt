@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ricardojrsousa.movook.R
@@ -18,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
+class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main), LifecycleObserver {
 
     override val viewModel: MainViewModel by viewModels()
 
@@ -29,20 +32,31 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         setupRecyclerView(view, moviesInTheatresAdapter)
         observeViewModel(moviesInTheatresAdapter)
 
-        startPostponedEnterTransition()
-
         setupView()
+
+        viewLifecycleOwner.lifecycle.addObserver(this)
     }
 
     private fun setupView() {
         option_discover.setOnClickListener {
             navigate(MainFragmentDirections.actionMainFragmentToDiscoverFragment())
         }
-        option_upcoming.setOnClickListener { showComingSoonToast() }
+        //option_upcoming.setOnClickListener { showComingSoonToast() }
         option_top_rated.setOnClickListener {
             showLoading()
             navigate(MainFragmentDirections.actionMainFragmentToTopRatedMoviesFragment())
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onFragmentCreate() {
+        if (viewModel.loadedItems.isEmpty())
+            showLoading()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewLifecycleOwner.lifecycle.removeObserver(this)
     }
 
     private fun showComingSoonToast() = Toast.makeText(requireContext(), R.string.coming_soon, Toast.LENGTH_LONG).show()
@@ -87,7 +101,10 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
     }
 
     private fun observeViewModel(movieListAdapter: BindableViewListAdapter<Movie>) {
-        viewModel.moviesInTheatres.observe(viewLifecycleOwner, { movieListAdapter.addItems(it) })
+        viewModel.moviesInTheatres.observe(viewLifecycleOwner, {
+            startPostponedEnterTransition()
+            movieListAdapter.addItems(it)
+        })
 
         viewModel.topRatedMovieBackdrop.observe(viewLifecycleOwner, {
             options_top_rated_background.loadImage(it)

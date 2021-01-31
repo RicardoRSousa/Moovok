@@ -44,7 +44,7 @@ class BindableViewListAdapter<T : Identifiable>(val view: BindableViewHolder<T>,
 
     inner class ViewHolder internal constructor(private val view: BindableViewHolder<T>) : RecyclerView.ViewHolder(view.itemView) {
         internal fun bind(item: T?, position: Int) {
-            view.bind(item, position, onClickListener)
+            view.bind(item, onClickListener)
         }
     }
 

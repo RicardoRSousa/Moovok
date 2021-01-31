@@ -15,7 +15,7 @@
     <string name="no_biography_available">No biography available</string>
 
     <string name="top_rated_movies_title">Top rated movies</string>
-    <string name="top_rated_movies_subtitle">This list contains the top rated movies with over 1000 votes.</string>
+    <string name="top_rated_movies_subtitle">with over 1000 votes</string>
     <string name="welcome_step_2_desc">... find out in which book was the movie based on and, who knows, give it a read ;)</string>
     <string name="welcome_step_1_desc">Welcome to Movook!\n\nSee the upcoming, top rated movies and discover your next favorite! Check its details and...</string>
 

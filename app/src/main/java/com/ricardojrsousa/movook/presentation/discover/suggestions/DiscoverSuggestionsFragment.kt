@@ -19,13 +19,13 @@ import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import com.ricardojrsousa.movook.presentation.viewHolders.MovieSuggestionViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_discover_suggestions.*
+import kotlinx.android.synthetic.main.fragment_discover_suggestions.view.*
 import www.sanju.zoomrecyclerlayout.ZoomRecyclerLayout
 
 
 @AndroidEntryPoint
 class DiscoverSuggestionsFragment : BaseFragment<DiscoverViewModel>(R.layout.fragment_discover_suggestions), LifecycleObserver {
 
-    private lateinit var suggestionsListAdapter: BindableViewListAdapter<Movie>
     override lateinit var viewModel: DiscoverViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,8 +36,11 @@ class DiscoverSuggestionsFragment : BaseFragment<DiscoverViewModel>(R.layout.fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView()
-        observeViewModel()
+
+        val suggestionsListAdapter= createSuggestionMoviesAdapter()
+
+        setupView(view, suggestionsListAdapter)
+        observeViewModel(suggestionsListAdapter)
         startPostponedEnterTransition()
 
         viewLifecycleOwner.lifecycle.addObserver(this)
@@ -48,26 +51,13 @@ class DiscoverSuggestionsFragment : BaseFragment<DiscoverViewModel>(R.layout.fra
         viewLifecycleOwner.lifecycle.removeObserver(this)
     }
 
-    private fun setupView() {
-
-        suggestionsListAdapter = BindableViewListAdapter(MovieSuggestionViewHolder()) { view, movie ->
-            showLoading()
-            if (movie != null) {
-                val action = DiscoverSuggestionsFragmentDirections.actionDiscoverSuggestionsFragmentToMovieDetailsFragment(movie.id)
-                if (view != null) {
-                    val extras = FragmentNavigatorExtras(view to movie.id)
-                    navigate(action, extras)
-                } else {
-                    navigate(action)
-                }
-            }
-        }
+    private fun setupView(view: View, suggestionsListAdapter: BindableViewListAdapter<Movie>) {
 
         val zoomRecyclerLayoutManager = ZoomRecyclerLayout(requireContext()).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
 
-        with(suggestions_recycler_view) {
+        with(view.suggestions_recycler_view) {
             layoutManager = zoomRecyclerLayoutManager
             LinearSnapHelper().attachToRecyclerView(this)
             isNestedScrollingEnabled = false
@@ -90,6 +80,21 @@ class DiscoverSuggestionsFragment : BaseFragment<DiscoverViewModel>(R.layout.fra
         }
     }
 
+    private fun createSuggestionMoviesAdapter() : BindableViewListAdapter<Movie> {
+        return BindableViewListAdapter(MovieSuggestionViewHolder()) { view, movie ->
+            showLoading()
+            if (movie != null) {
+                val action = DiscoverSuggestionsFragmentDirections.actionDiscoverSuggestionsFragmentToMovieDetailsFragment(movie.id)
+                if (view != null) {
+                    val extras = FragmentNavigatorExtras(view to movie.id)
+                    navigate(action, extras)
+                } else {
+                    navigate(action)
+                }
+            }
+        }
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun onFragmentPause() {
         viewModel.resetCurrentSuggestionsPage()
@@ -103,7 +108,7 @@ class DiscoverSuggestionsFragment : BaseFragment<DiscoverViewModel>(R.layout.fra
         }
     }
 
-    private fun observeViewModel() {
+    private fun observeViewModel(suggestionsListAdapter: BindableViewListAdapter<Movie>) {
         viewModel.discoveredMoviesList.observe(viewLifecycleOwner) {
             suggestionsListAdapter.addItems(it)
         }

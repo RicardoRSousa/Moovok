@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.view_person_biography.view.*
 class BiographyViewHolder : BindableViewHolder<Person> {
     override lateinit var itemView: View
 
-    override fun bind(person: Person?, position: Int?, clickListener: ((view: ImageView?, t: Person?) -> Unit)?) {
+    override fun bind(person: Person?, clickListener: ((view: ImageView?, t: Person?) -> Unit)?) {
         if (person?.biography.isNullOrBlank()) {
             itemView.biography_text_view.text = itemView.context.getString(R.string.no_biography_available)
         } else {

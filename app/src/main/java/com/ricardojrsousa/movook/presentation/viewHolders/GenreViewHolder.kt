@@ -24,7 +24,7 @@ class GenreViewHolder(
         return this
     }
 
-    override fun bind(genre: Genre?, position: Int?, clickListener: ((view: ImageView?, t: Genre?) -> Unit)?) {
+    override fun bind(genre: Genre?, clickListener: ((view: ImageView?, t: Genre?) -> Unit)?) {
         with(itemView) {
 
             checkable_chip_view.apply {

@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.view_known_for.view.*
 class KnownForViewHolder : BindableViewHolder<List<Movie>> {
     override lateinit var itemView: View
 
-    override fun bind(movies: List<Movie>?, position: Int?, clickListener: ((view: ImageView?, t: List<Movie>?) -> Unit)?) {
+    override fun bind(movies: List<Movie>?, clickListener: ((view: ImageView?, t: List<Movie>?) -> Unit)?) {
         if (movies != null) {
             val movieListAdapter = BindableViewListAdapter(MoviePosterViewHolder(150, 100)) { view, movie ->
                 clickListener?.invoke(view, listOf(movie!!))

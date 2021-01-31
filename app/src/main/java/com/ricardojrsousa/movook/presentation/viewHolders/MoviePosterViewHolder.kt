@@ -12,7 +12,7 @@ class MoviePosterViewHolder(private val posterHeight: Int? = null, private val p
 
     override lateinit var itemView: View
 
-    override fun bind(movie: Movie?, position: Int?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
+    override fun bind(movie: Movie?, clickListener: ((view: ImageView?, t: Movie?) -> Unit)?) {
         itemView.movie_poster_view.initView(movie, clickListener, posterHeight, posterWidth)
     }
 
