@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">  
-Movook is a small personal project that to function as a playgrounds to new android development techniques. Completely based on modern Android application tech-stacks and Clean architecture based on MVVM.
+Movook is a small personal project that aims to function as a playground to new android development techniques. Completely based on modern Android application tech-stacks and Clean architecture based on MVVM.
 </br>
 
 <p align="center">
