@@ -32,6 +32,7 @@ Movook is a small personal project that aims to function as a playground to new 
 - [Retrofit](https://github.com/square/retrofit) - A type-safe HTTP client for Android and Java.
 - [Picasso](https://square.github.io/picasso/) - A powerful image downloading and caching library for Android
 - [Material-Components](https://github.com/material-components/material-components-android)
+- [LeakCanary](https://square.github.io/leakcanary/)
 
 ## MAD Score
 <img height=450 src="/images/summary.png"/>
