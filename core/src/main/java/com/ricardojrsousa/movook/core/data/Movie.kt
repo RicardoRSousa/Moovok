@@ -2,8 +2,6 @@ package com.ricardojrsousa.movook.core.data
 
 import com.google.gson.annotations.SerializedName
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 /**

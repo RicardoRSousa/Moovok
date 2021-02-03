@@ -36,14 +36,11 @@ class DiscoverFragment : BaseFragment<DiscoverViewModel>(R.layout.fragment_disco
     }
 
     private fun setupView(view: View, genresList: List<Genre>) {
-        with(view) {
-            val pages = listOf(DiscoverFragmentStep1(), DiscoverFragmentStep2(genresList), DiscoverFragmentStep3())
+        val pages = listOf(DiscoverFragmentStep1(), DiscoverFragmentStep2(genresList), DiscoverFragmentStep3())
 
-            view_pager.adapter = DiscoverFragmentPagerAdapter(this@DiscoverFragment, pages)
-            tabMediator = TabLayoutMediator(tab_dots, view_pager) { _, _ -> }
-            tabMediator!!.attach()
-
-        }
+        view_pager.adapter = DiscoverFragmentPagerAdapter(this@DiscoverFragment, pages)
+        tabMediator = TabLayoutMediator(tab_dots, view_pager) { _, _ -> }
+        tabMediator!!.attach()
     }
 
     private fun observeViewModel(view: View) {

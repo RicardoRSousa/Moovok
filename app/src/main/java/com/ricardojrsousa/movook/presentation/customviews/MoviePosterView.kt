@@ -2,7 +2,6 @@ package com.ricardojrsousa.movook.presentation.customviews
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ricardojrsousa.movook.R

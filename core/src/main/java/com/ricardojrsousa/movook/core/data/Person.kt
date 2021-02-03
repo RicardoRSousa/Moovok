@@ -37,7 +37,7 @@ data class Person(
             val dateOfBirth = Calendar.getInstance()
             dateOfBirth.time = format.parse(birthday)
 
-            var mostRecentDayAlive = Calendar.getInstance()
+            val mostRecentDayAlive = Calendar.getInstance()
 
             if (!deathday.isNullOrEmpty()) {
                 mostRecentDayAlive.time = format.parse(deathday)

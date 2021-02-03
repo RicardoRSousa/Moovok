@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.presentation.BaseFragment
-import com.ricardojrsousa.movook.presentation.discover.DiscoverViewModel
 
 /**
  * Created by Ricardo Sousa on 21/01/2021.

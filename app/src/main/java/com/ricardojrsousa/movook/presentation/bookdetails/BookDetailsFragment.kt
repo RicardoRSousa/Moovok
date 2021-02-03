@@ -3,11 +3,8 @@ package com.ricardojrsousa.movook.presentation.bookdetails
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Book
@@ -15,7 +12,6 @@ import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.wrappers.loadBookCover
 import com.squareup.picasso.Callback
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_book_details.*
 import kotlinx.android.synthetic.main.fragment_book_details.view.*
 
 @AndroidEntryPoint

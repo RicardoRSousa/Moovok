@@ -1,7 +1,7 @@
 package com.ricardojrsousa.movook.framework.api
 
-import com.ricardojrsousa.movook.core.data.*
-import retrofit2.Response
+import com.ricardojrsousa.movook.core.data.Book
+import com.ricardojrsousa.movook.core.data.BookWrapper
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

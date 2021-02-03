@@ -100,12 +100,16 @@ class DiscoverFragmentStep3 : Fragment(), OnRangeChangedListener {
     }
 
     override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
-        if (view?.id == R.id.year_range_seek_bar) {
-            setYearRangeLabels(leftValue.toInt(), rightValue.toInt())
-        } else if (view?.id == R.id.runtime_range_seek_bar) {
-            setRuntimeRangeLabels(leftValue.toInt(), rightValue.toInt())
-        } else if(view?.id == R.id.min_vote_agv_seekbar){
-            setMinVoteAvgLabels(leftValue.toDouble())
+        when (view?.id) {
+            R.id.year_range_seek_bar -> {
+                setYearRangeLabels(leftValue.toInt(), rightValue.toInt())
+            }
+            R.id.runtime_range_seek_bar -> {
+                setRuntimeRangeLabels(leftValue.toInt(), rightValue.toInt())
+            }
+            R.id.min_vote_agv_seekbar -> {
+                setMinVoteAvgLabels(leftValue.toDouble())
+            }
         }
     }
 

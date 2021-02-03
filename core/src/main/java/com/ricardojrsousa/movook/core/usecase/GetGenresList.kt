@@ -1,6 +1,5 @@
 package com.ricardojrsousa.movook.core.usecase
 
-import com.ricardojrsousa.movook.core.repository.BooksRepository
 import com.ricardojrsousa.movook.core.repository.MoviesRepository
 
 /**

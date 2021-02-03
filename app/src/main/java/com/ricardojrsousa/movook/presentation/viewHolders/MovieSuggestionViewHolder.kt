@@ -7,7 +7,6 @@ import android.widget.ImageView
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.wrappers.loadBigMoviePoster
-import com.ricardojrsousa.movook.wrappers.loadMoviePoster
 import kotlinx.android.synthetic.main.list_item_movie_suggestion.view.*
 
 /**

@@ -7,7 +7,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.ricardojrsousa.movook.R
@@ -15,8 +14,8 @@ import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
 import com.ricardojrsousa.movook.presentation.discover.DiscoverViewModel
-import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import com.ricardojrsousa.movook.presentation.viewHolders.MovieSuggestionViewHolder
+import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_discover_suggestions.*
 import kotlinx.android.synthetic.main.fragment_discover_suggestions.view.*

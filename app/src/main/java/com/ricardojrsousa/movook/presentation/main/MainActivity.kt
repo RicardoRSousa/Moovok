@@ -7,6 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.ricardojrsousa.movook.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,13 +19,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val FIRST_APP_OPENING = "first_app_opening"
-    private val PREFERENCES = "preferences"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
+
+        initAdView()
 
         val navController = findNavController(R.id.nav_host_fragment_container)
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.welcomeFragment, R.id.mainFragment))
@@ -46,5 +49,16 @@ class MainActivity : AppCompatActivity() {
             }
             navController.navigate(R.id.welcomeFragment)
         }
+    }
+
+    private fun initAdView() {
+        MobileAds.initialize(applicationContext)
+        val adRequest = AdRequest.Builder().build()
+        ad_view.loadAd(adRequest)
+    }
+
+    companion object {
+        private const val FIRST_APP_OPENING = "first_app_opening"
+        private const val PREFERENCES = "preferences"
     }
 }

@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.ricardojrsousa.movook.R
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
-import com.ricardojrsousa.movook.utils.PaginationScrollListener
-import com.ricardojrsousa.movook.presentation.viewHolders.MoviePosterViewHolder
 import com.ricardojrsousa.movook.presentation.viewHolders.TopRatedMovieViewHolder
+import com.ricardojrsousa.movook.utils.PaginationScrollListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_top_rated_movies.view.*
 

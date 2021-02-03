@@ -1,12 +1,10 @@
 package com.ricardojrsousa.movook.presentation.moviedetails
 
-import android.util.Log
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import com.ricardojrsousa.movook.core.data.Book
 import com.ricardojrsousa.movook.core.data.Movie
 import com.ricardojrsousa.movook.core.data.MovieDetails
@@ -14,15 +12,11 @@ import com.ricardojrsousa.movook.framework.BookUseCases
 import com.ricardojrsousa.movook.framework.MovieUseCases
 import com.ricardojrsousa.movook.presentation.BaseViewModel
 import com.ricardojrsousa.movook.utils.filterAdult
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class MovieDetailsViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
-    val movieUseCases: MovieUseCases, val bookUseCases: BookUseCases
+    val movieUseCases: MovieUseCases, private val bookUseCases: BookUseCases
 ) : BaseViewModel() {
 
     private val _movieDetails: MutableLiveData<MovieDetails> = MutableLiveData()

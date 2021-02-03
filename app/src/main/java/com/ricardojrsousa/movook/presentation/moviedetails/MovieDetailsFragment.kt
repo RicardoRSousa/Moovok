@@ -2,7 +2,6 @@ package com.ricardojrsousa.movook.presentation.moviedetails
 
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebViewClient
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -116,7 +115,7 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
         })
 
         viewModel.similarMovies.observe(viewLifecycleOwner, {
-            setupSimilarMoviesVisibility(!it.isEmpty())
+            setupSimilarMoviesVisibility(it.isNotEmpty())
             similarMoviesAdapter.addItems(it)
         })
 

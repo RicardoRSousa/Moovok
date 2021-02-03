@@ -69,20 +69,19 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
     }
 
     override suspend fun getGenresList(): GenreWrapper {
-        val genreWrapper = movieService.getGenresList()
-        return genreWrapper
+        return movieService.getGenresList()
     }
 
     override suspend fun getDiscoverMovies(includedGenres: List<String>, fromYear: Int, toYear: Int, minRuntime: Int, maxRuntime: Int, minVoteAvg: Double, page: Int): MovieWrapper {
         val map: HashMap<String, String?> = HashMap()
-        map.put("with_genres", includedGenres.joinToString(","))
-        map.put("primary_release_date.gte", "${fromYear}-01-01")
-        map.put("primary_release_date.lte", "${toYear}-12-31")
-        map.put("with_runtime.gte", minRuntime.toString())
-        map.put("with_runtime.lte", maxRuntime.toString())
-        map.put("vote_average.gte", minVoteAvg.toString())
-        map.put("vote_count.gte", "1000")
-        map.put("page", page.toString())
+        map["with_genres"] = includedGenres.joinToString(",")
+        map["primary_release_date.gte"] = "${fromYear}-01-01"
+        map["primary_release_date.lte"] = "${toYear}-12-31"
+        map["with_runtime.gte"] = minRuntime.toString()
+        map["with_runtime.lte"] = maxRuntime.toString()
+        map["vote_average.gte"] = minVoteAvg.toString()
+        map["vote_count.gte"] = "1000"
+        map["page"] = page.toString()
 
         val movieWrapper = movieService.getDiscoverMovies(map)
         movieWrapper.results.filterAdult().forEach { movieDao.addMovieEntity(MovieEntity.fromMovie(it)) }

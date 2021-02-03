@@ -63,7 +63,7 @@ class PersonDetailsFragment : BaseFragment<PersonDetailsViewModel>(R.layout.frag
     }
 
     private fun observeViewModel(inforViewPagerAdapter: PersonDetailsViewPagerAdapter) {
-        viewModel.personDetails.observe(viewLifecycleOwner, Observer {
+        viewModel.personDetails.observe(viewLifecycleOwner, {
             setupView(it)
             inforViewPagerAdapter.setPerson(it)
         })

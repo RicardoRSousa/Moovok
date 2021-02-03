@@ -1,6 +1,5 @@
 package com.ricardojrsousa.movook.framework.api
 
-import com.ricardojrsousa.movook.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -8,7 +7,7 @@ import java.io.IOException
 private const val API_KEY = "api_key"
 private const val LANGUAGE = "language"
 
-class AuthorizationInterceptor : Interceptor {
+object AuthorizationInterceptor : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
