@@ -48,6 +48,10 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main), Lifecy
             showLoading()
             navigate(MainFragmentDirections.actionMainFragmentToTopRatedMoviesFragment())
         }
+
+        tmdb_logo.setOnClickListener {
+            navigate(MainFragmentDirections.actionMainFragmentToLoginFragment())
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

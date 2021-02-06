@@ -62,7 +62,7 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
     }
 
     override suspend fun getTopRatedMoviesBackdrops(): String {
-        val index = Random.nextInt(1, 7)
+        val index = Random.nextInt(1, 8)
         val backdropsReference = firebaseStorage.reference.child("popular_movies_backdrops").child("${index}.jpg")
         val result = backdropsReference.downloadUrl.await()
         return result.toString()

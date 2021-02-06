@@ -24,6 +24,9 @@
             app:destination="@id/discoverFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
 
     </fragment>
 
@@ -112,6 +115,9 @@
             app:popUpTo="@id/discoverSuggestionsFragment"
             app:popUpToInclusive="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ricardojrsousa.movook.presentation.login.LoginFragment" />
 
 
 </navigation>
