@@ -13,6 +13,7 @@ import retrofit2.http.QueryMap
 
 private const val MOVIE = "movie"
 private const val PERSON = "person"
+private const val MOVIE_ID = "${MOVIE}/{movie_id}"
 
 const val POSTER_PATH_PREFIX = "https://image.tmdb.org/t/p/w400"
 const val BIG_POSTER_PATH_PREFIX = "https://image.tmdb.org/t/p/w780"
@@ -23,19 +24,19 @@ interface MoviesAPI {
     @GET("${MOVIE}/now_playing")
     suspend fun getMoviesInTheatres(@Query("page") page: Int): MovieWrapper
 
-    @GET("${MOVIE}/{movie_id}")
+    @GET(MOVIE_ID)
     suspend fun getMovieDetails(@Path("movie_id") movieId: String): MovieDetails
 
     @GET("${MOVIE}/top_rated")
     suspend fun getTopRatedMovies(@Query("page") page: Int): MovieWrapper
 
-    @GET("${MOVIE}/{movie_id}/credits")
+    @GET("${MOVIE_ID}/credits")
     suspend fun getMovieCast(@Path("movie_id") movieId: String): Cast
 
-    @GET("${MOVIE}/{movie_id}/keywords")
+    @GET("${MOVIE_ID}/keywords")
     suspend fun getMovieKeywords(@Path("movie_id") movieId: String): MovieKeywordWrapper
 
-    @GET("${MOVIE}/{movie_id}/similar")
+    @GET("${MOVIE_ID}/similar")
     suspend fun getSimilarMovies(@Path("movie_id") movieId: String, @Query("page") page: Int): MovieWrapper
 
     @GET("${PERSON}/{person_id}")
@@ -49,4 +50,7 @@ interface MoviesAPI {
 
     @GET("discover/movie")
     suspend fun getDiscoverMovies(@QueryMap discoverMoviesQueryMap: Map<String, String?>): MovieWrapper
+
+    @GET("${MOVIE_ID}/videos")
+    suspend fun getMovieVideos(@Path("movie_id") movieId: String): MovieVideoWrapper
 }

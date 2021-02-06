@@ -1,17 +1,20 @@
 package com.ricardojrsousa.movook.presentation.moviedetails
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.MediaController
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
 import com.ricardojrsousa.movook.R
-import com.ricardojrsousa.movook.core.data.Book
-import com.ricardojrsousa.movook.core.data.Movie
-import com.ricardojrsousa.movook.core.data.MovieDetails
-import com.ricardojrsousa.movook.core.data.Person
+import com.ricardojrsousa.movook.core.data.*
 import com.ricardojrsousa.movook.presentation.BaseFragment
 import com.ricardojrsousa.movook.presentation.BindableViewListAdapter
 import com.ricardojrsousa.movook.presentation.viewHolders.BookCoverViewHolder
@@ -26,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_movie_details.view.*
 
 
 @AndroidEntryPoint
-class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragment_movie_details) {
+class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragment_movie_details), YouTubePlayerListener {
 
     override val viewModel: MovieDetailsViewModel by viewModels()
     private lateinit var movieId: String
@@ -120,6 +123,20 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
         })
 
         viewModel.relatedBooks.observe(viewLifecycleOwner, { if (it != null) relatedBooksAdapter.addItems(it) })
+
+        viewModel.movieTrailer.observe(viewLifecycleOwner, { setupVideoView(it) })
+    }
+
+    private fun setupVideoView(movieTrailerUrl: String?) {
+        movieTrailerUrl?.let { url ->
+            lifecycle.addObserver(movie_trailer)
+            movie_trailer.getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
+                override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
+                    youTubePlayer.cueVideo(url, 0f)
+                }
+            })
+            movie_trailer.addYouTubePlayerListener(this)
+        }
     }
 
     private fun setupSimilarMoviesVisibility(hasSimilarMovies: Boolean) {
@@ -154,5 +171,47 @@ class MovieDetailsFragment : BaseFragment<MovieDetailsViewModel>(R.layout.fragme
             related_books_label.visibility = View.VISIBLE
             related_books_list.visibility = View.VISIBLE
         }
+    }
+
+    override fun onApiChange(youTubePlayer: YouTubePlayer) {
+        //Do nothing
+    }
+
+    override fun onCurrentSecond(youTubePlayer: YouTubePlayer, second: Float) {
+        //Do nothing
+    }
+
+    override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
+        movie_trailer.visibility = View.INVISIBLE
+        no_trailer_textview.visibility = View.VISIBLE
+
+    }
+
+    override fun onPlaybackQualityChange(youTubePlayer: YouTubePlayer, playbackQuality: PlayerConstants.PlaybackQuality) {
+        //Do nothing
+    }
+
+    override fun onPlaybackRateChange(youTubePlayer: YouTubePlayer, playbackRate: PlayerConstants.PlaybackRate) {
+        //Do nothing
+    }
+
+    override fun onReady(youTubePlayer: YouTubePlayer) {
+        //Do nothing
+    }
+
+    override fun onStateChange(youTubePlayer: YouTubePlayer, state: PlayerConstants.PlayerState) {
+        //Do nothing
+    }
+
+    override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {
+        //Do nothing
+    }
+
+    override fun onVideoId(youTubePlayer: YouTubePlayer, videoId: String) {
+        //Do nothing
+    }
+
+    override fun onVideoLoadedFraction(youTubePlayer: YouTubePlayer, loadedFraction: Float) {
+        //Do nothing
     }
 }

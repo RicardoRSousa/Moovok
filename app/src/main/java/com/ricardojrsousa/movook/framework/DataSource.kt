@@ -88,6 +88,8 @@ class DataSource(context: Context) : MoviesDataSource, BooksDataSource {
         return movieWrapper
     }
 
+    override suspend fun getMovieVideos(movieId: String): MovieVideoWrapper = movieService.getMovieVideos(movieId)
+
     override suspend fun searchBooksByTitle(query: String): List<Book> {
         val books = bookService.searchBooksByTitle(query)
         //TODO: Save on db

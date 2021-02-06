@@ -13,5 +13,6 @@ data class MovieUseCases(
     val getTopRatedMovies: GetTopRatedMovies,
     val getTopRatedMoviesBackdrops: GetTopRatedMoviesBackdrops,
     val getGenresList: GetGenresList,
-    val getDiscoverMovies: GetDiscoverMovies
+    val getDiscoverMovies: GetDiscoverMovies,
+    val getMovieVideos: GetMovieVideos
 )

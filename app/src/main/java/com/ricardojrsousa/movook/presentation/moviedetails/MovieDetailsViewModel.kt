@@ -28,6 +28,9 @@ class MovieDetailsViewModel @ViewModelInject constructor(
     private val _relatedBooks: MutableLiveData<List<Book>> = MutableLiveData()
     val relatedBooks: LiveData<List<Book>> = _relatedBooks
 
+    private val _movieTrailer: MutableLiveData<String> = MutableLiveData()
+    val movieTrailer: LiveData<String> = _movieTrailer
+
     fun init(movieId: String) {
         coroutineScope.launch {
             val movieDetails = movieUseCases.getMovieDetails.invoke(movieId)
@@ -35,6 +38,9 @@ class MovieDetailsViewModel @ViewModelInject constructor(
 
             val similarMovies = movieUseCases.getSimilarMovies.invoke(movieId, 1)
             _similarMovies.postValue(similarMovies.results.filterAdult())
+
+            val movieVideos = movieUseCases.getMovieVideos.invoke(movieId)
+            _movieTrailer.postValue(movieVideos.getYoutubeTrailerKey())
 
             //TODO: This logic should stay or should go?
             if (movieDetails.isBasedOnBook()) {

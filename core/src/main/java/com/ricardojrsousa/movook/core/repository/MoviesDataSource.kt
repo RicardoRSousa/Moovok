@@ -1,9 +1,6 @@
 package com.ricardojrsousa.movook.core.repository
 
-import com.ricardojrsousa.movook.core.data.GenreWrapper
-import com.ricardojrsousa.movook.core.data.Person
-import com.ricardojrsousa.movook.core.data.MovieDetails
-import com.ricardojrsousa.movook.core.data.MovieWrapper
+import com.ricardojrsousa.movook.core.data.*
 
 /**
  * Created by ricardosousa on 18/05/2020
@@ -17,4 +14,5 @@ interface MoviesDataSource {
     suspend fun getTopRatedMoviesBackdrops(): String
     suspend fun getGenresList(): GenreWrapper
     suspend fun getDiscoverMovies(includedGenres: List<String>, fromYear: Int, toYear: Int, minRuntime: Int, maxRuntime: Int, minVoteAvg: Double, page: Int): MovieWrapper
+    suspend fun getMovieVideos(movieId: String): MovieVideoWrapper
 }

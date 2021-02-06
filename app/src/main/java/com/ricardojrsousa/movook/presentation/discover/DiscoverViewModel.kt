@@ -75,7 +75,7 @@ class DiscoverViewModel @ViewModelInject constructor(
     }
 
     fun includeGenre(genre: Genre) {
-        this.includedGenresList.add(genre.id)
+         this.includedGenresList.add(genre.id)
     }
 
     fun ignoreGenre(genre: Genre) {
