@@ -154,20 +154,6 @@
             app:showFullScreenButton="false"
             app:useWebUi="true" />
 
-        <TextView
-            android:id="@+id/no_trailer_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/details_default_lateral_margin"
-            android:layout_marginTop="@dimen/details_default_horizontal_margin"
-            android:layout_marginEnd="@dimen/details_default_lateral_margin"
-            android:text="No trailers found"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_description" />
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cast_list"
             android:layout_width="0dp"

@@ -2,13 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
     <item android:drawable="@color/colorPrimary" />
-    <item
-        android:adjustViewBounds="true"
-        android:bottom="700dp"
-        android:drawable="@drawable/ic_movook_logo_white"
-        android:left="100dp"
-        android:right="100dp"
-        android:top="700dp">
-
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_movook_white" />
     </item>
 </layer-list>
